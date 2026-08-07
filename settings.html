@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Settings Page</title>
+</head>
+
+<body>
+    <table border="1" width="100%">
+        <tr>
+            <td width="20%">
+                <img src="C:\Users\ompat\Downloads\phoenix-dragon-yin-yang-fire-pfp-6bzfklxzuyext0vw.jpg" width="85"
+                    height="85">
+            </td>
+            <td width="55%">
+                <h1>SETTINGS</h1>
+            </td>
+            <td width="25%" align="right">
+                <a href="landingPage.html"><button>Back</button></a>
+                <button>Logout</button>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <table border="1" width="100%" cellpadding="8">
+        <tr>
+            <td><b>Student Name:</b> Patel Om Ketankumar</td>
+            <td><b>Student ID:</b> 25DCS095</td>
+            <td><b>Department:</b> CSE</td>
+            <td><b>Semester:</b> 3rd</td>
+        </tr>
+    </table>
+
+    <br>
+    <h3>Account & Portal Preferences</h3>
+    <table border="1" width="100%" cellpadding="8">
+        <tr>
+            <td width="30%"><b>Change Password:</b></td>
+            <td>
+                <form>
+                    Current: <input type="password" name="cur_pass" size="15">
+                    New: <input type="password" name="new_pass" size="15">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td><b>Notifications:</b></td>
+            <td>
+                <input type="checkbox" checked> Email Alerts
+                <input type="checkbox" checked> Exam Updates
+                <input type="checkbox"> SMS Alerts
+            </td>
+        </tr>
+        <tr>
+            <td><b>Privacy & 2FA:</b></td>
+            <td>
+                Visibility:
+                <select name="visibility">
+                    <option>Public</option>
+                    <option>Private</option>
+                </select>
+                | 2FA:
+                <input type="radio" name="2fa" value="on"> On
+                <input type="radio" name="2fa" value="off" checked> Off
+            </td>
+        </tr>
+        <tr>
+            <td><b>Language & Region:</b></td>
+            <td>
+                Language:
+                <select name="lang">
+                    <option>English</option>
+                    <option>Hindi</option>
+                    <option>Gujarati</option>
+                </select>
+                | Timezone: (GMT+05:30) IST
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <table width="100%">
+        <tr>
+            <td align="right">
+                <button>Save All Settings</button>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
