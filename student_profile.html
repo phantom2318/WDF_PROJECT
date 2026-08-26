@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Profile & College Portal</title>
+    <link rel="stylesheet" href="student_style.css">
+</head>
+<body>
+
+    <header>
+        <h1>ABC College of Engineering</h1>
+        <p>Official Student Information & Registration Portal</p>
+    </header>
+    <main>
+           
+            
+          
+
+        <section id="academics">
+            <h2>Academic Goals for Semester</h2>
+
+            <ol>
+                <li>Complete Web Development Practical Tasks</li>
+                <li>Prepare for Mid-Term Examinations</li>
+                <li>Submit Data Structures Assignment</li>
+                <li>Participate in Annual College Coding Contest</li>
+            </ol>
+        </section>
+
+        <section id="marksheet">
+            <h2>Semester 1 Grade Report</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Credits</th>
+                        <th>Grade Obtained</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CS101</td>
+                        <td>Introduction to Programming</td>
+                        <td>4</td>
+                        <td>A</td>
+                    </tr>
+                    <tr>
+                        <td>CS102</td>
+                        <td>Web Development Fundamentals</td>
+                        <td>3</td>
+                        <td>A+</td>
+                    </tr>
+                    <tr>
+                        <td>MA101</td>
+                        <td>Engineering Mathematics I</td>
+                        <td>4</td>
+                        <td>B+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="registration">
+            <h2>Course Elective Registration Form</h2>
+
+            <form action="#" method="post">
+                
+                <div>
+                    <label for="fullname">Full Name:</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
+
+                <div>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="student@college.edu" required>
+                </div>
+
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div>
+                    <label>Gender:</label>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male" style="width: auto;">Male</label>
+                    
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female" style="width: auto;">Female</label>
+                    
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other" style="width: auto;">Other</label>
+                </div>
+
+                <div>
+                    <label for="department">Department:</label>
+                    <select id="department" name="department">
+                        <option value="cs">Computer Science</option>
+                        <option value="it">Information Technology</option>
+                        <option value="ece">Electronics & Communication</option>
+                        <option value="me">Mechanical Engineering</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Interests:</label>
+                    <input type="checkbox" id="coding" name="interest" value="coding">
+                    <label for="coding" style="width: auto;">Coding</label>
+                    
+                    <input type="checkbox" id="sports" name="interest" value="sports">
+                    <label for="sports" style="width: auto;">Sports</label>
+                    
+                    <input type="checkbox" id="music" name="interest" value="music">
+                    <label for="music" style="width: auto;">Music</label>
+                </div>
+
+                <div>
+                    <label for="bio">Self Description:</label><br>
+                    <textarea id="bio" name="bio" rows="4" cols="40" placeholder="Write a short description about yourself..."></textarea>
+                </div>
+
+                <div>
+                    <input type="submit" value="Submit Registration">
+                </div>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Student Web Development Practical Project. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Charusat Events</title>
+               <link rel="stylesheet" href="style.css"> 
+    </head>
+    <body>
+          <header>
+            <p><h1>Register for the Event</h1></p>
+          </header>
+          <section id="registration">
+            <h2>Registration Form</h2>
+
+            <form action="#" method="post">
+                
+                <div>
+                    <label for="fullname">Full Name:</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
+
+                <div>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" placeholder="student@college.edu" required>
+                </div>
+
+                <div>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div>
+                    <label>Gender:</label>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male" style="width: auto;">Male</label>
+                    
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female" style="width: auto;">Female</label>
+                    
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other" style="width: auto;">Other</label>
+                </div>
+
+                <div>
+                    <label for="department">Department:</label>
+                    <select id="department" name="department">
+                        <option value="cs">Computer Science</option>
+                        <option value="it">Information Technology</option>
+                        <option value="ece">Electronics & Communication</option>
+                        <option value="me">Mechanical Engineering</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Events:</label>
+                    <input type="checkbox" id="AIdea" name="interest" value="AIdea">
+                    <label for="coding" style="width: auto;">AIdea</label> 
+                    
+                    <input type="checkbox" id="Smart India Hackathon" name="interest" value="Smart India Hackathon">
+                    <label for="coding" style="width: auto;">Smart India Hackathon</label>
+
+                    <input type="checkbox" id="i-fest" name="interest" value="i-fest">
+                    <label for="coding" style="width: auto;">i-fest</label>
+
+                    <input type="checkbox" id="Cultural" name="interest" value="Cultural">
+                    <label for="coding" style="width: auto;">Cultural</label>
+                </div>
+
+                <div>
+                    <input type="reset" value="Reset">
+                    <input style="padding: 5;" type="submit" value="Submit Registration">
+                </div>
+            </form>
+        </section> 
+         <footer>
+            <p><b>© 2026 Student Events CHARUSAT, Anand</b></p>
+
+        </footer>     
+    </body>
+</html>
