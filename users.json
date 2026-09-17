@@ -1,0 +1,14 @@
+[
+  {
+    "studentId": "25DCS095",
+    "name": "Admin User",
+    "email": "admin@college.edu",
+    "mobile": "9876543210",
+    "gender": "male",
+    "password": "Admin@123",
+    "course": "btech",
+    "year": "2",
+    "department": "cs",
+    "interests": []
+  }
+]
