@@ -4,30 +4,7 @@
 <head>
     <title>Landing Page</title>
     <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* ── Weather widget ── */
-        #weather-widget {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            color: #fff;
-            border-radius: 10px;
-            padding: 10px 18px;
-            font-size: 13px;
-            min-width: 200px;
-            box-shadow: 0 2px 8px rgba(59,130,246,0.35);
-            vertical-align: middle;
-        }
-        #weather-widget .w-icon { font-size: 28px; line-height: 1; }
-        #weather-widget .w-temp { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-        #weather-widget .w-info { display: flex; flex-direction: column; gap: 1px; }
-        #weather-widget .w-desc { font-size: 12px; opacity: 0.88; text-transform: capitalize; }
-        #weather-widget .w-city { font-size: 11px; opacity: 0.75; }
-        #weather-widget.loading { opacity: 0.6; font-style: italic; }
-        #weather-widget.error   { background: linear-gradient(135deg, #7f1d1d, #ef4444); }
-    </style>
+    <link rel="stylesheet" href="portal.css">
     <script>
         function logout() {
             sessionStorage.removeItem('loggedIn');
@@ -46,6 +23,10 @@
             </td>
             <td width="55%">
                 <h1>WELCOME, USER.</h1>
+                <div id="weather-widget" class="loading">
+                    <span class="w-icon">⏳</span>
+                    <span>Fetching weather…</span>
+                </div>
             </td>
             <td width="25%" align="right">
                 <a href="settings.html"><button>Settings</button></a>
@@ -79,14 +60,6 @@
 
 
             <td width="80%" valign="top">
-
-                <!-- ── Weather widget ── -->
-                <div id="weather-widget" class="loading">
-                    <span class="w-icon">⏳</span>
-                    <span>Fetching weather…</span>
-                </div>
-
-                <br><br>
 
                 <h2>Events</h2>
                 <p>Content for events goes here...</p>

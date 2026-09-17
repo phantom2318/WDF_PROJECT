@@ -4,77 +4,36 @@
 <head>
     <title>Event Registration</title>
     <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
+    <link rel="stylesheet" href="portal.css">
+    <style>
+        /* form table layout */
+        .form-label { width: 170px; font-weight: 600; vertical-align: top; padding: 8px 6px; font-size: 13px; color: var(--text-muted); }
+        .form-field  { padding: 6px 4px; }
+        .form-field input, .form-field select { width: 280px; }
+
+        /* password strength */
+        #strength-bar-wrap { width: 280px; height: 5px; background: var(--border); border-radius: 99px; margin-top: 6px; }
+        #strength-bar      { height: 100%; width: 0; border-radius: 99px; transition: width 0.3s, background 0.3s; }
+        #strength-text     { font-size: 11px; color: var(--text-muted); }
+
+        /* success banner */
+        #success-msg {
+            display: none;
+            background: var(--success-bg);
+            color: var(--success);
+            border: 1px solid #bbf7d0;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+    </style>
     <script>
         function logout() {
             sessionStorage.removeItem('loggedIn');
             window.location.replace('login.html');
         }
     </script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 10px;
-            background-color: #fff;
-            color: #000;
-        }
-
-        h1, h2, h3 { margin: 4px 0; }
-
-        button {
-            padding: 5px 12px;
-            cursor: pointer;
-        }
-
-        /* form table cells */
-        .form-label { width: 170px; font-weight: bold; vertical-align: top; padding: 6px 4px; }
-        .form-field  { padding: 6px 4px; }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="password"],
-        select {
-            width: 260px;
-            padding: 4px 6px;
-            font-size: 14px;
-            border: 1px solid #888;
-        }
-
-        /* inline error text */
-        .err {
-            display: none;
-            color: red;
-            font-size: 12px;
-            margin-top: 2px;
-        }
-
-        input.invalid, select.invalid { border: 2px solid red; }
-
-        /* password strength */
-        #strength-bar-wrap {
-            width: 260px;
-            height: 6px;
-            background: #ddd;
-            margin-top: 4px;
-        }
-        #strength-bar {
-            height: 100%;
-            width: 0;
-            transition: width 0.3s, background 0.3s;
-        }
-        #strength-text { font-size: 11px; color: #555; }
-
-        /* success banner */
-        #success-msg {
-            display: none;
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            padding: 10px 14px;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 
 <body>
