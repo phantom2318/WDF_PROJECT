@@ -2,84 +2,67 @@
 <html>
 
 <head>
-    <title>Student Portal — Home</title>
+    <title>Student Portal — Dashboard</title>
     <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
     <link rel="stylesheet" href="portal.css">
-    <style>
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 32px 24px;
-        }
-
-        .home-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-lg);
-            padding: 52px 56px;
-            text-align: center;
-            max-width: 440px;
-            width: 100%;
-        }
-
-        .home-card h1 {
-            font-size: 2.1rem;
-            margin-bottom: 10px;
-        }
-
-        .home-card .tagline {
-            color: var(--text-muted);
-            font-size: 14px;
-            margin-bottom: 40px;
-            line-height: 1.5;
-        }
-
-        .home-card .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 0 0 32px;
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn-group a { flex: 1; }
-
-        .btn-group button {
-            width: 100%;
-            padding: 12px 0;
-            font-size: 14px;
-        }
-    </style>
+    <script src="portal.js"></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
+    <table border="1" width="100%">
+        <tr>
+            <td width="20%">
+                <img src="C:\Users\ompat\Downloads\phoenix-dragon-yin-yang-fire-pfp-6bzfklxzuyext0vw.jpg"
+                    style="height:85px;width:85px;">
+            </td>
+            <td width="55%">
+                <h1>WELCOME, USER.</h1>
+                <div id="weather-widget" class="loading">
+                    <span class="w-icon">⏳</span>
+                    <span>Fetching weather…</span>
+                </div>
+            </td>
+            <td width="25%" align="right">
+                <a href="settings.html"><button>Settings</button></a>
+                <button>Notification</button>
+            </td>
+        </tr>
+    </table>
 
-    <div class="home-card">
-        <h1>&#127979; Student Portal</h1>
-        <p class="tagline">Your academic dashboard — manage fees,<br>clubs, events &amp; more.</p>
-        <div class="divider"></div>
-        <div class="btn-group">
-            <a href="login.html">
-                <button>Login</button>
-            </a>
-            <a href="login.html">
-                <button class="btn-outline" onclick="sessionStorage.setItem('openTab','reg')">Register</button>
-            </a>
-        </div>
-    </div>
+    <br>
 
-    <script>
-        if (sessionStorage.getItem('loggedIn') === 'true') {
-            window.location.replace('landingPage.html');
-        }
-    </script>
+
+    <table border="1" width="100%">
+        <tr>
+
+            <td width="20%" valign="top">
+                <button id="hamburger-btn" onclick="toggleMenu()" style="width: 90%; margin-bottom: 15px;">☰ Menu</button>
+                <div id="menu-options">
+                    <a href="profile.html"><button>Profile</button><br><br></a>
+                    <a href="Academics.html"><button>Academics</button></a><br><br>
+                    <a href="fees.html"><button>Fees</button><br><br></a>
+                    <button>Projects</button><br><br>
+                    <button>Participations</button><br><br>
+                    <a href="clubs.html"><button>Clubs</button></a><br><br>
+                    <a href="extracurricular.html"><button>Extracurriculars</button><br><br></a>
+                    <button>Achievements</button><br><br>
+                    <a href="registration.html"><button>Event Registration</button></a><br><br>
+                    <a href="settings.html"><button>Settings</button></a><br><br>
+                    <button onclick="logout()">Logout</button>
+                </div>
+            </td>
+
+
+            <td width="80%" valign="top">
+
+                <h2>Events</h2>
+                <p>Content for events goes here...</p>
+            </td>
+        </tr>
+    </table>
+
+    <script src="weather.js"></script>
 
 </body>
 
