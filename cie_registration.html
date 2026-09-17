@@ -1,79 +1,407 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Event Registration</title>
-               <link rel="stylesheet" href="style.css"> 
-    </head>
-    <body>
-          <header>
-            <p><h1>Register for the Event</h1></p>
-          </header>
-          <section id="registration">
-            <h2>Registration Form</h2>
 
-            <form action="#" method="post">
-                
-                <div>
-                    <label for="fullname">Full Name:</label>
-                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+<head>
+    <title>Event Registration</title>
+    <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        h1, h2, h3 { margin: 4px 0; }
+
+        button {
+            padding: 5px 12px;
+            cursor: pointer;
+        }
+
+        /* form table cells */
+        .form-label { width: 170px; font-weight: bold; vertical-align: top; padding: 6px 4px; }
+        .form-field  { padding: 6px 4px; }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        select {
+            width: 260px;
+            padding: 4px 6px;
+            font-size: 14px;
+            border: 1px solid #888;
+        }
+
+        /* inline error text */
+        .err {
+            display: none;
+            color: red;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        input.invalid, select.invalid { border: 2px solid red; }
+
+        /* password strength */
+        #strength-bar-wrap {
+            width: 260px;
+            height: 6px;
+            background: #ddd;
+            margin-top: 4px;
+        }
+        #strength-bar {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s, background 0.3s;
+        }
+        #strength-text { font-size: 11px; color: #555; }
+
+        /* success banner */
+        #success-msg {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px 14px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ── Top header bar (matches every other page) ── -->
+    <table border="1" width="100%">
+        <tr>
+            <td width="20%">
+                <img src="C:\Users\ompat\Downloads\phoenix-dragon-yin-yang-fire-pfp-6bzfklxzuyext0vw.jpg"
+                     style="height:85px;width:85px;">
+            </td>
+            <td width="55%">
+                <h1>EVENT REGISTRATION</h1>
+            </td>
+            <td width="25%" align="right">
+                <a href="landingPage.html"><button>Back</button></a>
+                <button>Logout</button>
+            </td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- ── Student info bar (matches every other page) ── -->
+    <table border="1" width="100%" cellpadding="8">
+        <tr>
+            <td><b>Student Name:</b> Patel Om Ketankumar</td>
+            <td><b>Student ID:</b> 25DCS095</td>
+            <td><b>Department:</b> Computer Science Engineering</td>
+            <td><b>Semester:</b> 3rd Semester</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- ── Registration form in a table cell ── -->
+    <h3>Registration Form</h3>
+    <table border="1" width="100%" cellpadding="0">
+        <tr>
+            <td valign="top" style="padding:14px;">
+
+                <form id="regForm" action="#" method="post" novalidate>
+                    <table cellpadding="0" cellspacing="0">
+
+                        <!-- Full Name -->
+                        <tr>
+                            <td class="form-label"><label for="fullname">Full Name *</label></td>
+                            <td class="form-field">
+                                <input type="text" id="fullname" name="fullname"
+                                       placeholder="Enter your full name"
+                                       aria-required="true" autocomplete="name">
+                                <div class="err" id="err-fullname">Name must be at least 3 letters (alphabets only).</div>
+                            </td>
+                        </tr>
+
+                        <!-- Email -->
+                        <tr>
+                            <td class="form-label"><label for="email">Email Address *</label></td>
+                            <td class="form-field">
+                                <input type="email" id="email" name="email"
+                                       placeholder="student@college.edu"
+                                       aria-required="true" autocomplete="email">
+                                <div class="err" id="err-email">Enter a valid email (e.g. name@domain.com).</div>
+                            </td>
+                        </tr>
+
+                        <!-- Mobile -->
+                        <tr>
+                            <td class="form-label"><label for="mobile">Mobile Number *</label></td>
+                            <td class="form-field">
+                                <input type="tel" id="mobile" name="mobile"
+                                       placeholder="10-digit mobile number"
+                                       aria-required="true" maxlength="10">
+                                <div class="err" id="err-mobile">Enter a valid 10-digit number starting with 6-9.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Password -->
+                        <tr>
+                            <td class="form-label"><label for="password">Password *</label></td>
+                            <td class="form-field">
+                                <input type="password" id="password" name="password"
+                                       aria-required="true" autocomplete="new-password">
+                                <div id="strength-bar-wrap"><div id="strength-bar"></div></div>
+                                <span id="strength-text"></span>
+                                <div class="err" id="err-password">Min 8 chars: upper, lower, digit &amp; special char.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Confirm Password -->
+                        <tr>
+                            <td class="form-label"><label for="confirm-password">Confirm Password *</label></td>
+                            <td class="form-field">
+                                <input type="password" id="confirm-password" name="confirm-password"
+                                       aria-required="true" autocomplete="new-password">
+                                <div class="err" id="err-confirm">Passwords do not match.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Course -->
+                        <tr>
+                            <td class="form-label"><label for="course">Course *</label></td>
+                            <td class="form-field">
+                                <select id="course" name="course" aria-required="true">
+                                    <option value="">-- Select Course --</option>
+                                    <option value="btech">B.Tech</option>
+                                    <option value="mtech">M.Tech</option>
+                                    <option value="bca">BCA</option>
+                                    <option value="mca">MCA</option>
+                                    <option value="bsc">B.Sc</option>
+                                </select>
+                                <div class="err" id="err-course">Please select your course.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Year -->
+                        <tr>
+                            <td class="form-label"><label for="year">Year of Study *</label></td>
+                            <td class="form-field">
+                                <select id="year" name="year" aria-required="true">
+                                    <option value="">-- Select Year --</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+                                </select>
+                                <div class="err" id="err-year">Please select your year of study.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Department -->
+                        <tr>
+                            <td class="form-label"><label for="department">Department</label></td>
+                            <td class="form-field">
+                                <select id="department" name="department">
+                                    <option value="">-- Select Department --</option>
+                                    <option value="cs">Computer Science</option>
+                                    <option value="it">Information Technology</option>
+                                    <option value="ece">Electronics &amp; Communication</option>
+                                    <option value="me">Mechanical Engineering</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <!-- Gender -->
+                        <tr>
+                            <td class="form-label">Gender *</td>
+                            <td class="form-field">
+                                <input type="radio" id="male" name="gender" value="male">
+                                <label for="male">Male</label> &nbsp;
+                                <input type="radio" id="female" name="gender" value="female">
+                                <label for="female">Female</label> &nbsp;
+                                <input type="radio" id="other" name="gender" value="other">
+                                <label for="other">Other</label>
+                                <div class="err" id="err-gender">Please select your gender.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Events -->
+                        <tr>
+                            <td class="form-label">Events</td>
+                            <td class="form-field">
+                                <input type="checkbox" id="AIdea" name="interest" value="AIdea">
+                                <label for="AIdea">AIdea</label> &nbsp;
+                                <input type="checkbox" id="sih" name="interest" value="Smart India Hackathon">
+                                <label for="sih">Smart India Hackathon</label> &nbsp;
+                                <input type="checkbox" id="ifest" name="interest" value="i-fest">
+                                <label for="ifest">i-fest</label> &nbsp;
+                                <input type="checkbox" id="cultural" name="interest" value="Cultural">
+                                <label for="cultural">Cultural</label>
+                            </td>
+                        </tr>
+
+                        <!-- Terms -->
+                        <tr>
+                            <td class="form-label">&nbsp;</td>
+                            <td class="form-field">
+                                <input type="checkbox" id="terms" name="terms" aria-required="true">
+                                <label for="terms">I accept the Terms &amp; Conditions</label>
+                                <div class="err" id="err-terms">You must accept the terms &amp; conditions.</div>
+                            </td>
+                        </tr>
+
+                        <!-- Buttons -->
+                        <tr>
+                            <td class="form-label">&nbsp;</td>
+                            <td class="form-field" style="padding-top:10px;">
+                                <input type="reset" value="Reset" id="resetBtn">
+                                &nbsp;
+                                <input type="submit" value="Submit Registration"
+                                       style="padding:5px 14px; font-weight:bold;">
+                            </td>
+                        </tr>
+
+                    </table>
+                </form>
+
+                <div id="success-msg">
+                    &#10003; Registration submitted successfully! Welcome aboard.
                 </div>
 
-                <div>
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" name="email" placeholder="student@college.edu" required>
-                </div>
+            </td>
+        </tr>
+    </table>
 
-                <div>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
+    <br>
 
-                <div>
-                    <label>Gender:</label>
-                    <input type="radio" id="male" name="gender" value="male">
-                    <label for="male" style="width: auto;">Male</label>
-                    
-                    <input type="radio" id="female" name="gender" value="female">
-                    <label for="female" style="width: auto;">Female</label>
-                    
-                    <input type="radio" id="other" name="gender" value="other">
-                    <label for="other" style="width: auto;">Other</label>
-                </div>
+</body>
 
-                <div>
-                    <label for="department">Department:</label>
-                    <select id="department" name="department">
-                        <option value="cs">Computer Science</option>
-                        <option value="it">Information Technology</option>
-                        <option value="ece">Electronics & Communication</option>
-                        <option value="me">Mechanical Engineering</option>
-                    </select>
-                </div>
+<script>
+(function () {
+    var PATTERNS = {
+        name:     /^[A-Za-z\s]{3,50}$/,
+        email:    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+        mobile:   /^[6-9]\d{9}$/,
+        password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+]).{8,}$/
+    };
 
-                <div>
-                    <label>Events:</label>
-                    <input type="checkbox" id="AIdea" name="interest" value="AIdea">
-                    <label for="coding" style="width: auto;">AIdea</label> 
-                    
-                    <input type="checkbox" id="Smart India Hackathon" name="interest" value="Smart India Hackathon">
-                    <label for="coding" style="width: auto;">Smart India Hackathon</label>
+    function setError(fieldEl, errId, isError) {
+        var errEl = document.getElementById(errId);
+        if (isError) {
+            fieldEl.classList.add('invalid');
+            errEl.style.display = 'block';
+        } else {
+            fieldEl.classList.remove('invalid');
+            errEl.style.display = 'none';
+        }
+        return isError;
+    }
 
-                    <input type="checkbox" id="i-fest" name="interest" value="i-fest">
-                    <label for="coding" style="width: auto;">i-fest</label>
+    // Password strength meter
+    document.getElementById('password').addEventListener('input', function () {
+        var val = this.value;
+        var score = 0;
+        if (val.length >= 8)                     score++;
+        if (/[A-Z]/.test(val))                   score++;
+        if (/[a-z]/.test(val))                   score++;
+        if (/\d/.test(val))                      score++;
+        if (/[@$!%*?&#^()\-_=+]/.test(val))      score++;
 
-                    <input type="checkbox" id="Cultural" name="interest" value="Cultural">
-                    <label for="coding" style="width: auto;">Cultural</label>
-                </div>
+        var bar    = document.getElementById('strength-bar');
+        var text   = document.getElementById('strength-text');
+        var widths = ['0%','20%','40%','60%','80%','100%'];
+        var colors = ['#ddd','#e74c3c','#e67e22','#f1c40f','#2ecc71','#27ae60'];
+        var labels = ['','Very Weak','Weak','Fair','Strong','Very Strong'];
 
-                <div>
-                    <input type="reset" value="Reset">
-                    <input style="padding: 5;" type="submit" value="Submit Registration">
-                </div>
-            </form>
-        </section>
-        <footer>
-            <p><b>© 2026 Student Events CHARUSAT, Anand</b></p>
+        bar.style.width      = widths[score];
+        bar.style.background = colors[score];
+        text.textContent     = val.length ? labels[score] : '';
+    });
 
-        </footer>   
-    </body>
+    function validateName() {
+        var el = document.getElementById('fullname');
+        return setError(el, 'err-fullname', !PATTERNS.name.test(el.value.trim()));
+    }
+    function validateEmail() {
+        var el = document.getElementById('email');
+        return setError(el, 'err-email', !PATTERNS.email.test(el.value.trim()));
+    }
+    function validateMobile() {
+        var el = document.getElementById('mobile');
+        return setError(el, 'err-mobile', !PATTERNS.mobile.test(el.value.trim()));
+    }
+    function validatePassword() {
+        var el = document.getElementById('password');
+        return setError(el, 'err-password', !PATTERNS.password.test(el.value));
+    }
+    function validateConfirm() {
+        var pw = document.getElementById('password').value;
+        var el = document.getElementById('confirm-password');
+        return setError(el, 'err-confirm', el.value !== pw || el.value === '');
+    }
+    function validateCourse() {
+        var el = document.getElementById('course');
+        return setError(el, 'err-course', el.value === '');
+    }
+    function validateYear() {
+        var el = document.getElementById('year');
+        return setError(el, 'err-year', el.value === '');
+    }
+    function validateGender() {
+        var radios  = document.querySelectorAll('input[name="gender"]');
+        var checked = false;
+        for (var i = 0; i < radios.length; i++) { if (radios[i].checked) { checked = true; break; } }
+        document.getElementById('err-gender').style.display = checked ? 'none' : 'block';
+        return !checked;
+    }
+    function validateTerms() {
+        var el = document.getElementById('terms');
+        document.getElementById('err-terms').style.display = el.checked ? 'none' : 'block';
+        return !el.checked;
+    }
+
+    // Live blur validation
+    document.getElementById('fullname').addEventListener('blur', validateName);
+    document.getElementById('email').addEventListener('blur', validateEmail);
+    document.getElementById('mobile').addEventListener('blur', validateMobile);
+    document.getElementById('password').addEventListener('blur', validatePassword);
+    document.getElementById('confirm-password').addEventListener('blur', validateConfirm);
+    document.getElementById('course').addEventListener('change', validateCourse);
+    document.getElementById('year').addEventListener('change', validateYear);
+
+    // Submit
+    document.getElementById('regForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var hasError = false;
+        if (validateName())     hasError = true;
+        if (validateEmail())    hasError = true;
+        if (validateMobile())   hasError = true;
+        if (validatePassword()) hasError = true;
+        if (validateConfirm())  hasError = true;
+        if (validateCourse())   hasError = true;
+        if (validateYear())     hasError = true;
+        if (validateGender())   hasError = true;
+        if (validateTerms())    hasError = true;
+
+        if (!hasError) {
+            document.getElementById('regForm').style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+        } else {
+            var first = document.querySelector('.invalid');
+            if (first) first.focus();
+        }
+    });
+
+    // Reset clears error highlights
+    document.getElementById('resetBtn').addEventListener('click', function () {
+        document.querySelectorAll('.invalid').forEach(function (el) { el.classList.remove('invalid'); });
+        document.querySelectorAll('.err').forEach(function (el) { el.style.display = 'none'; });
+        document.getElementById('strength-bar').style.width = '0';
+        document.getElementById('strength-text').textContent = '';
+    });
+}());
+</script>
+
 </html>
