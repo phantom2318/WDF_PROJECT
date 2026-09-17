@@ -4,6 +4,12 @@
 <head>
     <title>User Profile</title>
     <link rel="stylesheet" href="profile_style.css">
+    <script>
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            window.location.replace('login.html');
+        }
+    </script>
 </head>
 
 <body>
@@ -19,7 +25,7 @@
             </td>
             <td width="25DCS095%" align="right">
                 <a href="landingPage.html"><button>Back</button></a>
-                <button>Logout</button>
+                <button onclick="logout()">Logout</button>
             </td>
         </tr>
     </table>

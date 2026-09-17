@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Portal</title>
+    <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+            --radius-md: 10px;
+            --radius-sm: 6px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 24px 48px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .portal-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .portal-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.01em;
+        }
+
+        .portal-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+        }
+
+        /* ── Tab bar ── */
+        .tab-bar {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background: var(--bg-color);
+            color: var(--text-muted);
+            border-radius: 0;
+            box-shadow: none;
+            transform: none;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.2px;
+        }
+
+        .tab-btn:hover {
+            background: #f1f5f9;
+            color: var(--text-main);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .tab-btn.active {
+            background: var(--card-bg);
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ── Panels ── */
+        .tab-panel { display: none; padding: 32px 36px; }
+        .tab-panel.active { display: block; }
+
+        .panel-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 22px;
+            color: var(--text-main);
+        }
+
+        /* ── Form fields ── */
+        .form-group { margin-bottom: 16px; }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 9px 12px;
+            font-size: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-color);
+            color: var(--text-main);
+            transition: border-color 0.2s;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary-color);
+            background: #fff;
+        }
+
+        .form-group input.invalid,
+        .form-group select.invalid { border-color: #ef4444; }
+
+        /* radio / checkbox rows */
+        .radio-row, .check-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            padding: 4px 0;
+        }
+
+        .radio-row label, .check-row label {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-main);
+            text-transform: none;
+            letter-spacing: 0;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .radio-row input[type="radio"],
+        .check-row input[type="checkbox"] {
+            width: auto;
+            margin-right: 4px;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* error messages */
+        .err {
+            display: none;
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        /* password strength */
+        #strength-bar-wrap {
+            width: 100%;
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 99px;
+            margin-top: 6px;
+        }
+        #strength-bar {
+            height: 100%;
+            width: 0;
+            border-radius: 99px;
+            transition: width 0.3s, background 0.3s;
+        }
+        #strength-text { font-size: 11px; color: var(--text-muted); margin-top: 2px; display: block; }
+
+        /* submit / reset buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 6px;
+            font-family: inherit;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-hover), var(--primary-dark));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:active { transform: translateY(0); }
+
+        .btn-secondary {
+            padding: 9px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-color);
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #f1f5f9;
+            color: var(--text-main);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .btn-row .btn-primary { flex: 1; margin-top: 0; }
+
+        /* banners */
+        #error-banner {
+            display: none;
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        #reg-success-msg {
+            display: none;
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="portal-header">
+        <h1>&#127979; Student Portal</h1>
+        <p>Sign in or create a new account</p>
+    </div>
+
+    <div class="card">
+
+        <!-- Tab bar -->
+        <div class="tab-bar">
+            <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+            <button class="tab-btn"        id="tab-reg"   onclick="switchTab('reg')">Register</button>
+        </div>
+
+        <!-- ══════════ LOGIN PANEL ══════════ -->
+        <div class="tab-panel active" id="panel-login">
+            <p class="panel-title">Welcome back</p>
+
+            <div id="error-banner">Invalid Student ID or password. Please try again.</div>
+
+            <form id="loginForm" novalidate>
+                <div class="form-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" placeholder="e.g. 25DCS095" autocomplete="username">
+                    <div class="err" id="err-id">Please enter your Student ID.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password">
+                    <div class="err" id="err-pw">Please enter your password.</div>
+                </div>
+
+                <button type="submit" class="btn-primary">Sign In</button>
+            </form>
+        </div>
+
+        <!-- ══════════ REGISTER PANEL ══════════ -->
+        <div class="tab-panel" id="panel-reg">
+            <p class="panel-title">Create an account</p>
+
+            <form id="regForm" novalidate>
+
+                <div class="two-col">
+                    <!-- Full Name -->
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label for="fullname">Full Name *</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" autocomplete="name">
+                        <div class="err" id="err-fullname">Name must be at least 3 letters (alphabets only).</div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="student@college.edu" autocomplete="email">
+                        <div class="err" id="err-email">Enter a valid email (e.g. name@domain.com).</div>
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number *</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="10-digit number" maxlength="10">
+                        <div class="err" id="err-mobile">Valid 10-digit number starting with 6–9.</div>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="form-group">
+                        <label>Gender *</label>
+                        <div class="radio-row">
+                            <span><input type="radio" id="male" name="gender" value="male"><label for="male">Male</label></span>
+                            <span><input type="radio" id="female" name="gender" value="female"><label for="female">Female</label></span>
+                            <span><input type="radio" id="other" name="gender" value="other"><label for="other">Other</label></span>
+                        </div>
+                        <div class="err" id="err-gender">Please select your gender.</div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="reg-password">Password *</label>
+                        <input type="password" id="reg-password" name="password" autocomplete="new-password" placeholder="Create password">
+                        <div id="strength-bar-wrap"><div id="strength-bar"></div></div>
+                        <span id="strength-text"></span>
+                        <div class="err" id="err-password">Min 8 chars: upper, lower, digit &amp; special char.</div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password *</label>
+                        <input type="password" id="confirm-password" name="confirm-password" autocomplete="new-password" placeholder="Repeat password">
+                        <div class="err" id="err-confirm">Passwords do not match.</div>
+                    </div>
+
+                    <!-- Course -->
+                    <div class="form-group">
+                        <label for="course">Course *</label>
+                        <select id="course" name="course">
+                            <option value="">-- Select --</option>
+                            <option value="btech">B.Tech</option>
+                            <option value="mtech">M.Tech</option>
+                            <option value="bca">BCA</option>
+                            <option value="mca">MCA</option>
+                            <option value="bsc">B.Sc</option>
+                        </select>
+                        <div class="err" id="err-course">Please select your course.</div>
+                    </div>
+
+                    <!-- Year -->
+                    <div class="form-group">
+                        <label for="year">Year of Study *</label>
+                        <select id="year" name="year">
+                            <option value="">-- Select --</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                        <div class="err" id="err-year">Please select your year.</div>
+                    </div>
+
+                    <!-- Department -->
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label for="department">Department</label>
+                        <select id="department" name="department">
+                            <option value="">-- Select Department --</option>
+                            <option value="cs">Computer Science</option>
+                            <option value="it">Information Technology</option>
+                            <option value="ece">Electronics &amp; Communication</option>
+                            <option value="me">Mechanical Engineering</option>
+                        </select>
+                    </div>
+
+                    <!-- Events -->
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label>Events of Interest</label>
+                        <div class="check-row">
+                            <span><input type="checkbox" id="AIdea" name="interest" value="AIdea"><label for="AIdea">AIdea</label></span>
+                            <span><input type="checkbox" id="sih" name="interest" value="SIH"><label for="sih">Smart India Hackathon</label></span>
+                            <span><input type="checkbox" id="ifest" name="interest" value="i-fest"><label for="ifest">i-fest</label></span>
+                            <span><input type="checkbox" id="cultural" name="interest" value="Cultural"><label for="cultural">Cultural</label></span>
+                        </div>
+                    </div>
+
+                    <!-- Terms -->
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <div class="check-row">
+                            <input type="checkbox" id="terms" name="terms">
+                            <label for="terms" style="font-size:13px;">I accept the Terms &amp; Conditions</label>
+                        </div>
+                        <div class="err" id="err-terms">You must accept the terms &amp; conditions.</div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="reset" class="btn-secondary" id="resetBtn">Reset</button>
+                    <button type="submit" class="btn-primary">Register</button>
+                </div>
+
+            </form>
+
+            <div id="reg-success-msg">&#10003; Registration submitted successfully! Welcome aboard.</div>
+        </div>
+        <!-- end register panel -->
+
+    </div>
+
+    <p class="footer-note">Contact IT support if you have trouble signing in.</p>
+
+    <script>
+        // If already logged in, skip to portal
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            window.location.replace('landingPage.html');
+        }
+
+        // Open Register tab if coming from home.html Register button
+        if (sessionStorage.getItem('openTab') === 'reg') {
+            sessionStorage.removeItem('openTab');
+            document.getElementById('panel-login').classList.remove('active');
+            document.getElementById('panel-reg').classList.add('active');
+            document.getElementById('tab-login').classList.remove('active');
+            document.getElementById('tab-reg').classList.add('active');
+        }
+
+        // ── Tab switcher ──────────────────────────────────────────────────
+        function switchTab(tab) {
+            document.getElementById('panel-login').classList.toggle('active', tab === 'login');
+            document.getElementById('panel-reg').classList.toggle('active',   tab === 'reg');
+            document.getElementById('tab-login').classList.toggle('active',   tab === 'login');
+            document.getElementById('tab-reg').classList.toggle('active',     tab === 'reg');
+        }
+
+        // ── LOGIN ─────────────────────────────────────────────────────────
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var idEl = document.getElementById('student-id');
+            var pwEl = document.getElementById('login-password');
+            var valid = true;
+
+            document.getElementById('error-banner').style.display = 'none';
+            [idEl, pwEl].forEach(function (el) { el.classList.remove('invalid'); });
+            document.getElementById('err-id').style.display = 'none';
+            document.getElementById('err-pw').style.display = 'none';
+
+            if (!idEl.value.trim()) {
+                idEl.classList.add('invalid');
+                document.getElementById('err-id').style.display = 'block';
+                valid = false;
+            }
+            if (!pwEl.value) {
+                pwEl.classList.add('invalid');
+                document.getElementById('err-pw').style.display = 'block';
+                valid = false;
+            }
+            if (!valid) return;
+
+            // Demo credentials — replace with real auth when backend exists
+            if (idEl.value.trim() === '25DCS095' && pwEl.value === 'Admin@123') {
+                sessionStorage.setItem('loggedIn', 'true');
+                window.location.href = 'landingPage.html';
+            } else {
+                document.getElementById('error-banner').style.display = 'block';
+                idEl.classList.add('invalid');
+                pwEl.classList.add('invalid');
+            }
+        });
+
+        // ── REGISTER ──────────────────────────────────────────────────────
+        (function () {
+            var PATTERNS = {
+                name:     /^[A-Za-z\s]{3,50}$/,
+                email:    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                mobile:   /^[6-9]\d{9}$/,
+                password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+]).{8,}$/
+            };
+
+            function setError(fieldEl, errId, isError) {
+                var errEl = document.getElementById(errId);
+                if (isError) {
+                    fieldEl.classList.add('invalid');
+                    errEl.style.display = 'block';
+                } else {
+                    fieldEl.classList.remove('invalid');
+                    errEl.style.display = 'none';
+                }
+                return isError;
+            }
+
+            // Password strength meter
+            document.getElementById('reg-password').addEventListener('input', function () {
+                var val = this.value, score = 0;
+                if (val.length >= 8)                      score++;
+                if (/[A-Z]/.test(val))                    score++;
+                if (/[a-z]/.test(val))                    score++;
+                if (/\d/.test(val))                       score++;
+                if (/[@$!%*?&#^()\-_=+]/.test(val))       score++;
+
+                var bar    = document.getElementById('strength-bar');
+                var text   = document.getElementById('strength-text');
+                var widths = ['0%','20%','40%','60%','80%','100%'];
+                var colors = ['#e2e8f0','#ef4444','#f97316','#eab308','#22c55e','#16a34a'];
+                var labels = ['','Very Weak','Weak','Fair','Strong','Very Strong'];
+                bar.style.width      = widths[score];
+                bar.style.background = colors[score];
+                text.textContent     = val.length ? labels[score] : '';
+            });
+
+            function validateName()    { var el = document.getElementById('fullname');         return setError(el, 'err-fullname', !PATTERNS.name.test(el.value.trim())); }
+            function validateEmail()   { var el = document.getElementById('email');            return setError(el, 'err-email',    !PATTERNS.email.test(el.value.trim())); }
+            function validateMobile()  { var el = document.getElementById('mobile');           return setError(el, 'err-mobile',   !PATTERNS.mobile.test(el.value.trim())); }
+            function validatePassword(){ var el = document.getElementById('reg-password');     return setError(el, 'err-password', !PATTERNS.password.test(el.value)); }
+            function validateConfirm() {
+                var pw = document.getElementById('reg-password').value;
+                var el = document.getElementById('confirm-password');
+                return setError(el, 'err-confirm', el.value !== pw || el.value === '');
+            }
+            function validateCourse()  { var el = document.getElementById('course'); return setError(el, 'err-course', el.value === ''); }
+            function validateYear()    { var el = document.getElementById('year');   return setError(el, 'err-year',   el.value === ''); }
+            function validateGender() {
+                var radios  = document.querySelectorAll('input[name="gender"]');
+                var checked = Array.prototype.some.call(radios, function (r) { return r.checked; });
+                document.getElementById('err-gender').style.display = checked ? 'none' : 'block';
+                return !checked;
+            }
+            function validateTerms() {
+                var el = document.getElementById('terms');
+                document.getElementById('err-terms').style.display = el.checked ? 'none' : 'block';
+                return !el.checked;
+            }
+
+            // Live blur
+            document.getElementById('fullname').addEventListener('blur',          validateName);
+            document.getElementById('email').addEventListener('blur',             validateEmail);
+            document.getElementById('mobile').addEventListener('blur',            validateMobile);
+            document.getElementById('reg-password').addEventListener('blur',      validatePassword);
+            document.getElementById('confirm-password').addEventListener('blur',  validateConfirm);
+            document.getElementById('course').addEventListener('change',          validateCourse);
+            document.getElementById('year').addEventListener('change',            validateYear);
+
+            // Submit
+            document.getElementById('regForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var hasError = false;
+                if (validateName())     hasError = true;
+                if (validateEmail())    hasError = true;
+                if (validateMobile())   hasError = true;
+                if (validatePassword()) hasError = true;
+                if (validateConfirm())  hasError = true;
+                if (validateCourse())   hasError = true;
+                if (validateYear())     hasError = true;
+                if (validateGender())   hasError = true;
+                if (validateTerms())    hasError = true;
+
+                if (!hasError) {
+                    document.getElementById('regForm').style.display = 'none';
+                    document.getElementById('reg-success-msg').style.display = 'block';
+                } else {
+                    var first = document.querySelector('#panel-reg .invalid');
+                    if (first) first.focus();
+                }
+            });
+
+            // Reset clears highlights
+            document.getElementById('resetBtn').addEventListener('click', function () {
+                document.querySelectorAll('#regForm .invalid').forEach(function (el) { el.classList.remove('invalid'); });
+                document.querySelectorAll('#regForm .err').forEach(function (el) { el.style.display = 'none'; });
+                document.getElementById('strength-bar').style.width = '0';
+                document.getElementById('strength-text').textContent = '';
+            });
+        }());
+    </script>
+
+</body>
+</html>

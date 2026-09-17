@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Portal — Home</title>
+    <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Centre the home card vertically in the viewport */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .home-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 48px 56px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .home-card h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .home-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 36px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+        }
+
+        .btn-group a {
+            flex: 1;
+        }
+
+        .btn-group button {
+            width: 100%;
+            padding: 11px 0;
+            font-size: 15px;
+        }
+
+        .btn-outline {
+            background: var(--card-bg) !important;
+            color: var(--primary-color) !important;
+            border: 2px solid var(--primary-color) !important;
+            box-shadow: none !important;
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-color) !important;
+            color: var(--primary-hover) !important;
+            border-color: var(--primary-hover) !important;
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="home-card">
+        <h1>&#127979; Student Portal</h1>
+        <p>Your academic dashboard — manage fees, clubs, events &amp; more.</p>
+
+        <div class="btn-group">
+            <a href="login.html">
+                <button>Login</button>
+            </a>
+            <a href="login.html#register">
+                <button class="btn-outline" onclick="sessionStorage.setItem('openTab','reg')">Register</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // If already logged in, go straight to the portal
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            window.location.replace('landingPage.html');
+        }
+    </script>
+
+</body>
+
+</html>

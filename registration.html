@@ -4,6 +4,12 @@
 <head>
     <title>Event Registration</title>
     <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
+    <script>
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            window.location.replace('login.html');
+        }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -85,7 +91,7 @@
             </td>
             <td width="25%" align="right">
                 <a href="landingPage.html"><button>Back</button></a>
-                <button>Logout</button>
+                <button onclick="logout()">Logout</button>
             </td>
         </tr>
     </table>
