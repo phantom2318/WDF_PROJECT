@@ -1,9 +1,18 @@
 // ============================================================
 //  login.js — Login + Registration form logic for login.html
+//  Depends on: auth.js (loaded before this script)
 // ============================================================
 
+// ── Bootstrap: seed localStorage from users.json if needed ──
+AUTH.init(function (err) {
+    // Even if seeding fails the page stays usable (empty user list).
+    if (err) console.warn('auth.js: could not fetch users.json, starting empty.', err);
+});
+
 // ── Redirect if already logged in ────────────────────────────
-redirectIfLoggedIn();   // defined in portal.js
+if (sessionStorage.getItem('loggedIn') === 'true') {
+    window.location.replace('home.html');
+}
 
 // ── Open Register tab if flagged by landingPage.html ─────────
 if (sessionStorage.getItem('openTab') === 'reg') {
@@ -25,15 +34,19 @@ function switchTab(tab) {
 // ── LOGIN ─────────────────────────────────────────────────────
 document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
+
     var idEl  = document.getElementById('student-id');
     var pwEl  = document.getElementById('login-password');
     var valid = true;
 
+    // Clear previous errors
     document.getElementById('error-banner').style.display = 'none';
+    document.getElementById('error-banner').textContent   = '';
     [idEl, pwEl].forEach(function (el) { el.classList.remove('invalid'); });
     document.getElementById('err-id').style.display = 'none';
     document.getElementById('err-pw').style.display = 'none';
 
+    // Basic presence checks
     if (!idEl.value.trim()) {
         idEl.classList.add('invalid');
         document.getElementById('err-id').style.display = 'block';
@@ -46,12 +59,14 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     }
     if (!valid) return;
 
-    // Demo credentials — replace with real auth when a backend exists
-    if (idEl.value.trim() === '25DCS095' && pwEl.value === 'Admin@123') {
-        sessionStorage.setItem('loggedIn', 'true');
+    // Authenticate against stored users
+    var result = AUTH.login(idEl.value.trim(), pwEl.value);
+    if (result.ok) {
         window.location.href = 'home.html';
     } else {
-        document.getElementById('error-banner').style.display = 'block';
+        var banner = document.getElementById('error-banner');
+        banner.textContent   = result.error || 'Invalid Student ID or password. Please try again.';
+        banner.style.display = 'block';
         idEl.classList.add('invalid');
         pwEl.classList.add('invalid');
     }
@@ -63,7 +78,8 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         name:     /^[A-Za-z\s]{3,50}$/,
         email:    /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
         mobile:   /^[6-9]\d{9}$/,
-        password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+]).{8,}$/
+        password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+]).{8,}$/,
+        studentId:/^[A-Za-z0-9]{4,15}$/
     };
 
     function setError(fieldEl, errId, isError) {
@@ -97,6 +113,10 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         text.textContent     = val.length ? labels[score] : '';
     });
 
+    function validateRegStudentId() {
+        var el = document.getElementById('reg-student-id');
+        return setError(el, 'err-reg-id', !PATTERNS.studentId.test(el.value.trim()));
+    }
     function validateName()     { var el = document.getElementById('fullname');        return setError(el, 'err-fullname', !PATTERNS.name.test(el.value.trim())); }
     function validateEmail()    { var el = document.getElementById('email');           return setError(el, 'err-email',    !PATTERNS.email.test(el.value.trim())); }
     function validateMobile()   { var el = document.getElementById('mobile');          return setError(el, 'err-mobile',   !PATTERNS.mobile.test(el.value.trim())); }
@@ -121,42 +141,95 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     }
 
     // Live blur validation
-    document.getElementById('fullname').addEventListener('blur',         validateName);
-    document.getElementById('email').addEventListener('blur',            validateEmail);
-    document.getElementById('mobile').addEventListener('blur',           validateMobile);
-    document.getElementById('reg-password').addEventListener('blur',     validatePassword);
-    document.getElementById('confirm-password').addEventListener('blur', validateConfirm);
-    document.getElementById('course').addEventListener('change',         validateCourse);
-    document.getElementById('year').addEventListener('change',           validateYear);
+    document.getElementById('reg-student-id').addEventListener('blur',    validateRegStudentId);
+    document.getElementById('fullname').addEventListener('blur',           validateName);
+    document.getElementById('email').addEventListener('blur',              validateEmail);
+    document.getElementById('mobile').addEventListener('blur',             validateMobile);
+    document.getElementById('reg-password').addEventListener('blur',       validatePassword);
+    document.getElementById('confirm-password').addEventListener('blur',   validateConfirm);
+    document.getElementById('course').addEventListener('change',           validateCourse);
+    document.getElementById('year').addEventListener('change',             validateYear);
 
     // Submit
     document.getElementById('regForm').addEventListener('submit', function (e) {
         e.preventDefault();
         var hasError = false;
-        if (validateName())     hasError = true;
-        if (validateEmail())    hasError = true;
-        if (validateMobile())   hasError = true;
-        if (validatePassword()) hasError = true;
-        if (validateConfirm())  hasError = true;
-        if (validateCourse())   hasError = true;
-        if (validateYear())     hasError = true;
-        if (validateGender())   hasError = true;
-        if (validateTerms())    hasError = true;
+        if (validateRegStudentId()) hasError = true;
+        if (validateName())         hasError = true;
+        if (validateEmail())        hasError = true;
+        if (validateMobile())       hasError = true;
+        if (validatePassword())     hasError = true;
+        if (validateConfirm())      hasError = true;
+        if (validateCourse())       hasError = true;
+        if (validateYear())         hasError = true;
+        if (validateGender())       hasError = true;
+        if (validateTerms())        hasError = true;
 
-        if (!hasError) {
-            document.getElementById('regForm').style.display = 'none';
-            document.getElementById('reg-success-msg').style.display = 'block';
-        } else {
+        if (hasError) {
             var first = document.querySelector('#panel-reg .invalid');
             if (first) first.focus();
+            return;
+        }
+
+        // Collect interests
+        var interests = Array.prototype.map.call(
+            document.querySelectorAll('input[name="interest"]:checked'),
+            function (cb) { return cb.value; }
+        );
+
+        // Save to localStorage via auth.js
+        var result = AUTH.register({
+            studentId:  document.getElementById('reg-student-id').value,
+            name:       document.getElementById('fullname').value,
+            email:      document.getElementById('email').value,
+            mobile:     document.getElementById('mobile').value,
+            gender:     document.querySelector('input[name="gender"]:checked').value,
+            password:   document.getElementById('reg-password').value,
+            course:     document.getElementById('course').value,
+            year:       document.getElementById('year').value,
+            department: document.getElementById('department').value,
+            interests:  interests
+        });
+
+        if (result.ok) {
+            // Auto-logged-in by AUTH.register(); go straight to dashboard
+            window.location.href = 'home.html';
+        } else {
+            // Highlight the specific duplicate field and show an inline error
+            var fieldMap = {
+                studentId: { elId: 'reg-student-id', errId: 'err-reg-id' },
+                email:     { elId: 'email',           errId: 'err-email'  },
+                mobile:    { elId: 'mobile',           errId: 'err-mobile' }
+            };
+            var target = result.field && fieldMap[result.field];
+            if (target) {
+                var el  = document.getElementById(target.elId);
+                var err = document.getElementById(target.errId);
+                el.classList.add('invalid');
+                err.textContent    = result.error;
+                err.style.display  = 'block';
+                el.focus();
+            } else {
+                // Fallback banner for unexpected errors
+                var banner = document.createElement('div');
+                banner.style.cssText = 'background:#fee2e2;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:14px;';
+                banner.textContent   = result.error;
+                var form = document.getElementById('regForm');
+                form.insertBefore(banner, form.firstChild);
+                setTimeout(function () { if (banner.parentNode) banner.parentNode.removeChild(banner); }, 5000);
+            }
         }
     });
 
-    // Reset clears highlights
+    // Reset clears highlights and restores default error messages
     document.getElementById('resetBtn').addEventListener('click', function () {
         document.querySelectorAll('#regForm .invalid').forEach(function (el) { el.classList.remove('invalid'); });
         document.querySelectorAll('#regForm .err').forEach(function (el) { el.style.display = 'none'; });
-        document.getElementById('strength-bar').style.width = '0';
+        // Restore default text for fields that show duplicate errors
+        document.getElementById('err-reg-id').textContent = 'Student ID must be 4\u201315 alphanumeric characters.';
+        document.getElementById('err-email').textContent  = 'Enter a valid email (e.g. name@domain.com).';
+        document.getElementById('err-mobile').textContent = 'Valid 10-digit number starting with 6\u20139.';
+        document.getElementById('strength-bar').style.width  = '0';
         document.getElementById('strength-text').textContent = '';
     });
 }());

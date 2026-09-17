@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="C:\Users\ompat\Downloads\14772982.png">
     <link rel="stylesheet" href="portal.css">
     <script src="portal.js"></script>
+    <script src="auth.js"></script>
     <script src="script.js" defer></script>
 </head>
 
@@ -17,7 +18,7 @@
                     style="height:85px;width:85px;">
             </td>
             <td width="55%">
-                <h1>WELCOME, USER.</h1>
+                <h1 id="welcome-heading">WELCOME, USER.</h1>
                 <div id="weather-widget" class="loading">
                     <span class="w-icon">⏳</span>
                     <span>Fetching weather…</span>
@@ -63,6 +64,13 @@
     </table>
 
     <script src="weather.js"></script>
+    <script>
+        // Show the logged-in user's name in the welcome heading
+        (function () {
+            var name = getLoggedInName();
+            document.getElementById('welcome-heading').textContent = 'WELCOME, ' + name.toUpperCase() + '.';
+        }());
+    </script>
 
 </body>
 

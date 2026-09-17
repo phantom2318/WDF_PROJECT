@@ -157,6 +157,13 @@
             <form id="regForm" novalidate>
 
                 <div class="two-col">
+                    <!-- Student ID -->
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label for="reg-student-id">Student ID *</label>
+                        <input type="text" id="reg-student-id" name="studentId" placeholder="e.g. 25DCS095" autocomplete="off">
+                        <div class="err" id="err-reg-id">Student ID must be 4–15 alphanumeric characters.</div>
+                    </div>
+
                     <!-- Full Name -->
                     <div class="form-group" style="grid-column:1/-1;">
                         <label for="fullname">Full Name *</label>
@@ -281,6 +288,7 @@
     <p class="footer-note">Contact IT support if you have trouble signing in.</p>
 
     <script src="portal.js"></script>
+    <script src="auth.js"></script>
     <script src="login.js"></script>
 
 </body>
