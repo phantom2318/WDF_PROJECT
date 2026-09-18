@@ -29,6 +29,7 @@
         }
     </style>
     <script src="portal.js"></script>
+    <script src="profile_loader.js" defer></script>
 </head>
 
 <body>
@@ -55,10 +56,10 @@
     <!-- ── Student info bar (matches every other page) ── -->
     <table border="1" width="100%" cellpadding="8">
         <tr>
-            <td><b>Student Name:</b> Patel Om Ketankumar</td>
-            <td><b>Student ID:</b> 25DCS095</td>
-            <td><b>Department:</b> Computer Science Engineering</td>
-            <td><b>Semester:</b> 3rd Semester</td>
+            <td><b>Student Name:</b> <span data-profile="fullName">Patel Om Ketankumar</span></td>
+            <td><b>Student ID:</b> <span data-profile="studentId">25DCS095</span></td>
+            <td><b>Department:</b> <span data-profile="department">Computer Science Engineering</span></td>
+            <td><b>Semester:</b> <span data-profile="semester">3rd Semester</span></td>
         </tr>
     </table>
 

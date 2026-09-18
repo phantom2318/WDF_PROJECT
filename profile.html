@@ -5,6 +5,7 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="portal.css">
     <script src="portal.js"></script>
+    <script src="profile_loader.js" defer></script>
 </head>
 
 <body>
@@ -32,10 +33,10 @@
             <td width="30%" align="center" valign="top">
                 <br>
                 <img src="C:\Users\ompat\Downloads\cat.png" alt="Profile Picture" width="150" height="150">
-                <h2>Patel Om</h2>
-                <p><b>Student ID:</b>25DCS095</p>
-                <p><b>Department:</b> Computer Science Engineering</p>
-                <p><b>Semester:</b> 3rd Semester</p>
+                <h2 data-profile="fullName">Patel Om Ketankumar</h2>
+                <p><b>Student ID:</b> <span data-profile="studentId">25DCS095</span></p>
+                <p><b>Department:</b> <span data-profile="department">Computer Science Engineering</span></p>
+                <p><b>Semester:</b> <span data-profile="semester">3rd Semester</span></p>
                 <br>
                 <button>Edit Profile</button><br><br>
                 <button>Change Password</button>
@@ -47,20 +48,28 @@
                 <h3>Personal Information</h3>
                 <table border="1" width="100%" cellpadding="5">
                     <tr>
-                        <td width="30%"><b>Full Name:</b></td>
-                        <td>Patel Om Ketankumar</td>
+                        <td width="30%"><b>First Name:</b></td>
+                        <td><span data-profile="firstName">Om</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Middle Name:</b></td>
+                        <td><span data-profile="middleName">Ketankumar</span></td>
+                    </tr>
+                    <tr>
+                        <td><b>Last Name:</b></td>
+                        <td><span data-profile="lastName">Patel</span></td>
                     </tr>
                     <tr>
                         <td><b>Date of Birth:</b></td>
-                        <td>January 23, 2008</td>
+                        <td><span data-profile="dob">January 23, 2008</span></td>
                     </tr>
                     <tr>
                         <td><b>Gender:</b></td>
-                        <td>Male</td>
+                        <td><span data-profile="gender">Male</span></td>
                     </tr>
                     <tr>
                         <td><b>Blood Group:</b></td>
-                        <td>A+</td>
+                        <td><span data-profile="bloodGroup">A+</span></td>
                     </tr>
                 </table>
 
@@ -70,15 +79,15 @@
                 <table border="1" width="100%" cellpadding="5">
                     <tr>
                         <td width="30%"><b>Email Address:</b></td>
-                        <td>25dcs095@charusat.edu.in</td>
+                        <td><span data-profile="email">25dcs095@charusat.edu.in</span></td>
                     </tr>
                     <tr>
                         <td><b>Phone Number:</b></td>
-                        <td>+91 93130 90881</td>
+                        <td><span data-profile="phone">+91 93130 90881</span></td>
                     </tr>
                     <tr>
                         <td><b>Address:</b></td>
-                        <td>Ahmedabad, Gujarat</td>
+                        <td><span data-profile="address">Ahmedabad, Gujarat</span></td>
                     </tr>
                 </table>
 
@@ -88,15 +97,15 @@
                 <table border="1" width="100%" cellpadding="5">
                     <tr>
                         <td width="30%"><b>Course / Program:</b></td>
-                        <td>B.Tech Computer Science</td>
+                        <td><span data-profile="course">B.Tech Computer Science</span></td>
                     </tr>
                     <tr>
                         <td><b>Year / Semester:</b></td>
-                        <td>2nd Year / 3rd Semester</td>
+                        <td><span data-profile="year">2</span>nd Year / <span data-profile="semester">3rd Semester</span></td>
                     </tr>
                     <tr>
                         <td><b>CGPA:</b></td>
-                        <td>7.0</td>
+                        <td><span data-profile="cgpa">7.0</span></td>
                     </tr>
                 </table>
 

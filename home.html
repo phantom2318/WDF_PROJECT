@@ -68,7 +68,12 @@
         // Show the logged-in user's name in the welcome heading
         (function () {
             var name = getLoggedInName();
-            document.getElementById('welcome-heading').textContent = 'welcome ' + name;
+            var nameParts = name.split(' ');
+            // Assuming format is 'LastName FirstName MiddleName' or 'FirstName LastName'
+            // If the name is 'Patel Gyan', we want 'Gyan'. If it's 'Om', we want 'Om'.
+            // Let's grab the second word if it exists, otherwise the first.
+            var firstName = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+            document.getElementById('welcome-heading').textContent = 'WELCOME ' + firstName.toUpperCase();
         }());
     </script>
 

@@ -1,0 +1,20 @@
+{
+  "25DCS095": {
+    "studentId": "25DCS095",
+    "firstName": "Om",
+    "middleName": "Ketankumar",
+    "lastName": "Patel",
+    "fullName": "Patel Om Ketankumar",
+    "dob": "January 23, 2008",
+    "gender": "Male",
+    "bloodGroup": "A+",
+    "email": "25dcs095@charusat.edu.in",
+    "phone": "+91 93130 90881",
+    "address": "Ahmedabad, Gujarat",
+    "course": "B.Tech Computer Science",
+    "year": "2",
+    "semester": "3rd Semester",
+    "cgpa": "7.0",
+    "department": "Computer Science Engineering"
+  }
+}
