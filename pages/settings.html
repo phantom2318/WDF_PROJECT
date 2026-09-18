@@ -3,7 +3,9 @@
 
 <head>
     <title>Settings Page</title>
+    <script src="../scripts/theme.js"></script>
     <link rel="stylesheet" href="portal.css">
+    <link rel="stylesheet" href="darkmode.css">
     <script src="../scripts/portal.js"></script>
     <script src="../scripts/profile_loader.js" defer></script>
 </head>
@@ -81,6 +83,18 @@
                 | Timezone: (GMT+05:30) IST
             </td>
         </tr>
+        <tr>
+            <td><b>Appearance:</b></td>
+            <td>
+                <div class="theme-toggle-row">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dark-mode-toggle" onchange="THEME.toggleTheme()">
+                        <span class="toggle-track"></span>
+                    </label>
+                    <label class="toggle-label" for="dark-mode-toggle">Dark Mode</label>
+                </div>
+            </td>
+        </tr>
     </table>
 
     <br>
@@ -91,6 +105,11 @@
             </td>
         </tr>
     </table>
+
+    <script>
+        // Sync the checkbox to the currently saved theme after the DOM is ready
+        document.getElementById('dark-mode-toggle').checked = (THEME.currentTheme() === 'dark');
+    </script>
 
 </body>
 

@@ -1,0 +1,143 @@
+/* ============================================================
+   DARKMODE.CSS — Dark theme token overrides for the Student Portal
+   Applied by adding the class "dark" to <html>.
+   theme.js handles persisting the preference in localStorage.
+   ============================================================ */
+
+html.dark {
+    /* ── Background & surface ─────────────────────────── */
+    --bg:             #0f172a;
+    --surface:        #1e293b;
+    --surface-muted:  #162032;
+
+    /* ── Borders ──────────────────────────────────────── */
+    --border:         #334155;
+    --border-strong:  #475569;
+
+    /* ── Text ─────────────────────────────────────────── */
+    --text:           #f1f5f9;
+    --text-muted:     #94a3b8;
+    --text-light:     #64748b;
+
+    /* ── Primary tones (slightly brighter for dark bg) ── */
+    --primary:        #60a5fa;
+    --primary-hover:  #3b82f6;
+    --primary-dark:   #2563eb;
+    --primary-light:  #1e3a5f;
+
+    /* ── Status colours ───────────────────────────────── */
+    --success:        #4ade80;
+    --success-bg:     #052e16;
+    --danger:         #f87171;
+    --danger-bg:      #2d0a0a;
+    --warning:        #fbbf24;
+
+    /* ── Shadows (heavier for dark surfaces) ─────────── */
+    --shadow-xs:      0 1px 3px rgba(0,0,0,0.40);
+    --shadow-sm:      0 2px 6px rgba(0,0,0,0.40);
+    --shadow-md:      0 4px 16px rgba(0,0,0,0.50);
+    --shadow-lg:      0 8px 28px rgba(0,0,0,0.60);
+}
+
+/* ── h1 gradient needs explicit dark override ────────────── */
+html.dark h1 {
+    background: linear-gradient(135deg, #94a3b8 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Table header stays dark-slate (looks fine on both) ─── */
+html.dark th {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+/* ── h3 accent bar ───────────────────────────────────────── */
+html.dark h3 {
+    background: var(--primary-light);
+    color: var(--text);
+}
+
+/* ── Inputs ──────────────────────────────────────────────── */
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="tel"],
+html.dark input[type="password"],
+html.dark input[type="number"],
+html.dark select,
+html.dark textarea {
+    background: #1e293b;
+    color: var(--text);
+    border-color: var(--border-strong);
+}
+
+html.dark input:focus,
+html.dark select:focus,
+html.dark textarea:focus {
+    background: #0f172a;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(96,165,250,0.20);
+}
+
+/* ── Badge variants in dark ──────────────────────────────── */
+html.dark .badge-info {
+    background: var(--primary-light);
+    color: #93c5fd;
+}
+
+/* ── Dark-mode toggle switch ─────────────────────────────── */
+.theme-toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 46px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    transform: none;
+}
+
+.toggle-track {
+    position: absolute;
+    inset: 0;
+    background: var(--border-strong);
+    border-radius: 99px;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.toggle-track::before {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.25s;
+}
+
+.toggle-switch input:checked + .toggle-track {
+    background: var(--primary);
+}
+
+.toggle-switch input:checked + .toggle-track::before {
+    transform: translateX(20px);
+}
+
+.toggle-label {
+    font-size: 14px;
+    color: var(--text);
+    user-select: none;
+    cursor: pointer;
+}
