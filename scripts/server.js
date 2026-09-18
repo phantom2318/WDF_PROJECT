@@ -20,8 +20,8 @@ var path = require('path');
 var url  = require('url');
 
 var PORT     = 3000;
-var ROOT_DIR = __dirname;
-var USERS_FILE = path.join(ROOT_DIR, 'users.json');
+var ROOT_DIR = path.join(__dirname, '..');
+var USERS_FILE = path.join(ROOT_DIR, 'data', 'users.json');
 
 // ── MIME types for static serving ────────────────────────────
 var MIME = {
@@ -100,9 +100,9 @@ var server = http.createServer(function (req, res) {
         return;
     }
 
-    // Default to login.html at root
+    // Default to landing page at root
     if (pathname === '/' || pathname === '') {
-        pathname = '/login.html';
+        pathname = '/pages/landingPage.html';
     }
 
     var filePath = path.join(ROOT_DIR, pathname);

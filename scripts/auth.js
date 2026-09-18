@@ -57,7 +57,7 @@ var AUTH = (function () {
             if (callback) callback(null);
             return;
         }
-        fetch('users.json')
+        fetch('../data/users.json')
             .then(function (r) { return r.json(); })
             .then(function (data) {
                 saveUsers(data);

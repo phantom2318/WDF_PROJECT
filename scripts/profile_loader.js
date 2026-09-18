@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var user = AUTH.currentUser();
     if (!user || !user.studentId) return;
 
-    fetch('profile.json')
+    fetch('../data/profile.json')
         .then(response => response.json())
         .then(profiles => {
             var profileData = profiles[user.studentId];
