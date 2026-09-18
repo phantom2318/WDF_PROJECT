@@ -18,7 +18,7 @@
                     style="height:85px;width:85px;">
             </td>
             <td width="55%">
-                <h1 id="welcome-heading">WELCOME, USER.</h1>
+                <h1 id="welcome-heading">welcome user</h1>
                 <div id="weather-widget" class="loading">
                     <span class="w-icon">⏳</span>
                     <span>Fetching weather…</span>
@@ -68,7 +68,7 @@
         // Show the logged-in user's name in the welcome heading
         (function () {
             var name = getLoggedInName();
-            document.getElementById('welcome-heading').textContent = 'WELCOME, ' + name.toUpperCase() + '.';
+            document.getElementById('welcome-heading').textContent = 'welcome ' + name;
         }());
     </script>
 

@@ -5,6 +5,7 @@
     <title>Clubs Page</title>
     <link rel="stylesheet" href="portal.css">
     <script src="portal.js"></script>
+    <script src="clubs.js" defer></script>
 </head>
 
 <body>
@@ -42,11 +43,11 @@
     <h3>Club Categories</h3>
     <table border="1" width="100%">
         <tr align="center">
-            <td width="20%"><button><b>ALL CLUBS</b></button></td>
-            <td width="20%"><button><b>Technical Clubs</b></button></td>
-            <td width="20%"><button><b>Cultural Clubs</b></button></td>
-            <td width="20%"><button><b>Sports Clubs</b></button></td>
-            <td width="20%"><button><b>Literary Clubs</b></button></td>
+            <td width="20%"><button onclick="filterClubs('All')"><b>ALL CLUBS</b></button></td>
+            <td width="20%"><button onclick="filterClubs('Technical')"><b>Technical Clubs</b></button></td>
+            <td width="20%"><button onclick="filterClubs('Cultural')"><b>Cultural Clubs</b></button></td>
+            <td width="20%"><button onclick="filterClubs('Sports')"><b>Sports Clubs</b></button></td>
+            <td width="20%"><button onclick="filterClubs('Literary')"><b>Literary Clubs</b></button></td>
         </tr>
     </table>
 
@@ -96,8 +97,8 @@
 
 
     <h3>All Available Clubs</h3>
-    <table border="1" width="100%" cellpadding="10">
-        <tr>
+    <table id="all-clubs-table" border="1" width="100%" cellpadding="10">
+        <tr class="club-row" data-category="Technical">
             <td width="45%" align="center" valign="middle">
                 <br>
                 <img src="C:\Users\ompat\Downloads\8fcv3dvd5kch1.jpeg" alt="Club Image" width="300" height="150">
@@ -116,7 +117,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="club-row" data-category="Technical">
 
             <td width="45%" align="center" valign="middle">
                 <br>
@@ -138,7 +139,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="club-row" data-category="Cultural">
 
             <td width="45%" align="center" valign="middle">
                 <br>
