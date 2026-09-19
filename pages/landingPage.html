@@ -58,6 +58,58 @@
             padding: 12px 0;
             font-size: 14px;
         }
+
+        .faq-section {
+            width: min(100%, 820px);
+            margin-top: 36px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 1.65rem;
+            margin-bottom: 18px;
+        }
+
+        .faq-list {
+            display: grid;
+            gap: 14px;
+        }
+
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-xs);
+            overflow: hidden;
+        }
+
+        .faq-item summary {
+            padding: 20px 24px;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            list-style: none;
+        }
+
+        .faq-item summary::-webkit-details-marker { display: none; }
+
+        .faq-item summary::after {
+            content: '+';
+            float: right;
+            color: var(--primary);
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .faq-item[open] summary::after { content: '-'; }
+
+        .faq-item p {
+            padding: 0 24px 20px;
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -72,13 +124,51 @@
                 <button>Login</button>
             </a>
             <a href="login.html">
-                <button class="btn-outline" onclick="sessionStorage.setItem('openTab','reg')">Register</button>
+                <button id="register-btn" class="btn-outline">Register</button>
             </a>
         </div>
     </div>
 
+    <section class="faq-section" aria-labelledby="faq-title">
+        <h2 id="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>How do I access my student dashboard?</summary>
+                <p>Select Login and enter your registered student ID and password.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How can I create a new account?</summary>
+                <p>Select Register to complete the student registration form and create your account.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What can I manage in the portal?</summary>
+                <p>You can manage academic information, fees, clubs, events, profile details, and registrations.</p>
+            </details>
+            <details class="faq-item">
+                <summary>What should I do if I forget my password?</summary>
+                <p>Contact your institution's portal administrator for help restoring access.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Where can I check my fee information?</summary>
+                <p>Log in and open the Fees section from your student dashboard to view your payment details.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How do I join a club or event?</summary>
+                <p>Open Clubs or Extracurricular from the dashboard, choose an available activity, and submit your registration.</p>
+            </details>
+            <details class="faq-item">
+                <summary>Can I update my profile information?</summary>
+                <p>Yes. Open your Profile page after logging in to review and update the information available to you.</p>
+            </details>
+            <details class="faq-item">
+                <summary>How do I switch between light and dark mode?</summary>
+                <p>Use the theme toggle available in the portal settings to change the appearance of the portal.</p>
+            </details>
+        </div>
+    </section>
+
     <script src="../scripts/portal.js"></script>
-    <script>redirectIfLoggedIn();</script>
+    <script src="../scripts/landing.js"></script>
 
 </body>
 

@@ -1,9 +1,3 @@
-/* ============================================================
-   PORTAL.CSS — Single master stylesheet for the Student Portal
-   All pages link to this file (or to a *_style.css that imports it).
-   ============================================================ */
-
-/* ── Design tokens ─────────────────────────────────────────── */
 :root {
     --primary:        #3b82f6;
     --primary-hover:  #2563eb;

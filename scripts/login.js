@@ -1,11 +1,5 @@
-// ============================================================
-//  login.js — Login + Registration form logic for login.html
-//  Depends on: auth.js (loaded before this script)
-// ============================================================
-
-// ── Bootstrap: seed localStorage from users.json if needed ──
 AUTH.init(function (err) {
-    // Even if seeding fails the page stays usable (empty user list).
+    
     if (err) console.warn('auth.js: could not fetch users.json, starting empty.', err);
 });
 
@@ -192,8 +186,22 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         });
 
         if (result.ok) {
-            // Auto-logged-in by AUTH.register(); go straight to dashboard
-            window.location.href = 'home.html';
+            // Keep the page blocked until the user acknowledges the result.
+            var successDialog = document.getElementById('registration-success-dialog');
+            var successOk = document.getElementById('registration-success-ok');
+            successDialog.classList.add('is-visible');
+            successDialog.setAttribute('aria-hidden', 'false');
+            successOk.focus();
+
+            successOk.addEventListener('click', function () {
+                window.location.href = 'home.html';
+            }, { once: true });
+
+            successDialog.addEventListener('click', function (event) {
+                if (event.target !== successDialog) return;
+                event.preventDefault();
+                successOk.focus();
+            });
         } else {
             // Highlight the specific duplicate field and show an inline error
             var fieldMap = {

@@ -1,8 +1,3 @@
-/* ============================================================
-   DARKMODE.CSS — Dark theme token overrides for the Student Portal
-   Applied by adding the class "dark" to <html>.
-   theme.js handles persisting the preference in localStorage.
-   ============================================================ */
 
 html.dark {
     /* ── Background & surface ─────────────────────────── */
