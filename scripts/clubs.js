@@ -3,9 +3,9 @@ function filterClubs(category) {
 
     clubRows.forEach(row => {
         if (category === 'All' || row.dataset.category === category) {
-            row.style.display = ''; // Show row
+            row.style.display = '';
         } else {
-            row.style.display = 'none'; // Hide row
+            row.style.display = 'none';
         }
     });
 }

@@ -1,4 +1,3 @@
-// Landing page interactions
 
 (function () {
     var registerButton = document.getElementById('register-btn');

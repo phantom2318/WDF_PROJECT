@@ -1,14 +1,10 @@
 AUTH.init(function (err) {
-    
+
     if (err) console.warn('auth.js: could not fetch users.json, starting empty.', err);
 });
-
-// ── Redirect if already logged in ────────────────────────────
 if (sessionStorage.getItem('loggedIn') === 'true') {
     window.location.replace('home.html');
 }
-
-// ── Open Register tab if flagged by landingPage.html ─────────
 if (sessionStorage.getItem('openTab') === 'reg') {
     sessionStorage.removeItem('openTab');
     document.getElementById('panel-login').classList.remove('active');
@@ -16,31 +12,23 @@ if (sessionStorage.getItem('openTab') === 'reg') {
     document.getElementById('tab-login').classList.remove('active');
     document.getElementById('tab-reg').classList.add('active');
 }
-
-// ── Tab switcher ─────────────────────────────────────────────
 function switchTab(tab) {
     document.getElementById('panel-login').classList.toggle('active', tab === 'login');
     document.getElementById('panel-reg').classList.toggle('active',   tab === 'reg');
     document.getElementById('tab-login').classList.toggle('active',   tab === 'login');
     document.getElementById('tab-reg').classList.toggle('active',     tab === 'reg');
 }
-
-// ── LOGIN ─────────────────────────────────────────────────────
 document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     var idEl  = document.getElementById('student-id');
     var pwEl  = document.getElementById('login-password');
     var valid = true;
-
-    // Clear previous errors
     document.getElementById('error-banner').style.display = 'none';
     document.getElementById('error-banner').textContent   = '';
     [idEl, pwEl].forEach(function (el) { el.classList.remove('invalid'); });
     document.getElementById('err-id').style.display = 'none';
     document.getElementById('err-pw').style.display = 'none';
-
-    // Basic presence checks
     if (!idEl.value.trim()) {
         idEl.classList.add('invalid');
         document.getElementById('err-id').style.display = 'block';
@@ -52,8 +40,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         valid = false;
     }
     if (!valid) return;
-
-    // Authenticate against stored users
     var result = AUTH.login(idEl.value.trim(), pwEl.value);
     if (result.ok) {
         window.location.href = 'home.html';
@@ -65,8 +51,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         pwEl.classList.add('invalid');
     }
 });
-
-// ── REGISTER ─────────────────────────────────────────────────
 (function () {
     var PATTERNS = {
         name:     /^[A-Za-z\s]{3,50}$/,
@@ -87,8 +71,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         }
         return isError;
     }
-
-    // Password strength meter
     document.getElementById('reg-password').addEventListener('input', function () {
         var val = this.value, score = 0;
         if (val.length >= 8)                      score++;
@@ -133,8 +115,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         document.getElementById('err-terms').style.display = el.checked ? 'none' : 'block';
         return !el.checked;
     }
-
-    // Live blur validation
     document.getElementById('reg-student-id').addEventListener('blur',    validateRegStudentId);
     document.getElementById('fullname').addEventListener('blur',           validateName);
     document.getElementById('email').addEventListener('blur',              validateEmail);
@@ -143,8 +123,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     document.getElementById('confirm-password').addEventListener('blur',   validateConfirm);
     document.getElementById('course').addEventListener('change',           validateCourse);
     document.getElementById('year').addEventListener('change',             validateYear);
-
-    // Submit
     document.getElementById('regForm').addEventListener('submit', function (e) {
         e.preventDefault();
         var hasError = false;
@@ -164,14 +142,10 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             if (first) first.focus();
             return;
         }
-
-        // Collect interests
         var interests = Array.prototype.map.call(
             document.querySelectorAll('input[name="interest"]:checked'),
             function (cb) { return cb.value; }
         );
-
-        // Save to localStorage via auth.js
         var result = AUTH.register({
             studentId:  document.getElementById('reg-student-id').value,
             name:       document.getElementById('fullname').value,
@@ -186,7 +160,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         });
 
         if (result.ok) {
-            // Keep the page blocked until the user acknowledges the result.
             var successDialog = document.getElementById('registration-success-dialog');
             var successOk = document.getElementById('registration-success-ok');
             successDialog.classList.add('is-visible');
@@ -203,7 +176,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
                 successOk.focus();
             });
         } else {
-            // Highlight the specific duplicate field and show an inline error
             var fieldMap = {
                 studentId: { elId: 'reg-student-id', errId: 'err-reg-id' },
                 email:     { elId: 'email',           errId: 'err-email'  },
@@ -218,7 +190,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
                 err.style.display  = 'block';
                 el.focus();
             } else {
-                // Fallback banner for unexpected errors
                 var banner = document.createElement('div');
                 banner.style.cssText = 'background:#fee2e2;color:#dc2626;border:1px solid #fecaca;border-radius:6px;padding:10px 14px;font-size:13px;font-weight:500;margin-bottom:14px;';
                 banner.textContent   = result.error;
@@ -228,12 +199,9 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             }
         }
     });
-
-    // Reset clears highlights and restores default error messages
     document.getElementById('resetBtn').addEventListener('click', function () {
         document.querySelectorAll('#regForm .invalid').forEach(function (el) { el.classList.remove('invalid'); });
         document.querySelectorAll('#regForm .err').forEach(function (el) { el.style.display = 'none'; });
-        // Restore default text for fields that show duplicate errors
         document.getElementById('err-reg-id').textContent = 'Student ID must be 4\u201315 alphanumeric characters.';
         document.getElementById('err-email').textContent  = 'Enter a valid email (e.g. name@domain.com).';
         document.getElementById('err-mobile').textContent = 'Valid 10-digit number starting with 6\u20139.';

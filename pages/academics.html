@@ -29,24 +29,24 @@
 
     <table border="1" width="100%" cellpadding="10" height="300">
         <tr>
-            <!-- Section 1: Results -->
+
             <td width="50%" valign="top" style="vertical-align: top;" id="result-section">
                 <h3>Results</h3>
                 <p>Click the button below to check your results.</p>
                 <button onclick="toggleResultForm()">Check Results</button>
-                
+
                 <br><br>
-                
+
                 <div id="result-form" style="display: none; background: var(--surface-muted); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--border); margin-top: 15px;">
                     <p style="margin-bottom: 6px;"><b>Semester:</b></p>
                     <input type="number" id="semester-input" style="width: 100%; margin-bottom: 16px;" min="1" max="8">
-                    
+
                     <p style="margin-bottom: 6px;"><b>Exam Type:</b></p>
                     <select id="exam-input" style="width: 100%; margin-bottom: 20px;">
                         <option value="Middle Term">Middle Term</option>
                         <option value="University">University</option>
                     </select>
-                    
+
                     <button onclick="displayResult()" style="width: 100%;">View</button>
                 </div>
 
@@ -54,22 +54,22 @@
                 <div id="result-display"></div>
             </td>
 
-            <!-- Section 2: Timetable -->
+
             <td width="50%" valign="top" style="vertical-align: top;" id="timetable-section">
                 <h3>Timetable</h3>
                 <p>Timetable details will go here...</p>
             </td>
         </tr>
         <tr>
-            <!-- Section 3: Attendance -->
+
             <td width="50%" valign="top" style="vertical-align: top;" id="attendance-section">
                 <h3>Attendance</h3>
                 <p>Attendance details will go here...</p>
             </td>
 
-            <!-- Section 4: Blank for now -->
+
             <td width="50%" valign="top" style="vertical-align: top;" id="blank-section">
-                
+
             </td>
         </tr>
     </table>

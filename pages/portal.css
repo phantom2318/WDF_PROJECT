@@ -36,7 +36,7 @@
     --transition:     all 0.22s var(--ease);
 }
 
-/* ── Reset & base ───────────────────────────────────────────── */
+
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -55,7 +55,7 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Typography ─────────────────────────────────────────────── */
+
 h1, h2, h3, h4 {
     margin-top: 0;
     font-weight: 700;
@@ -97,7 +97,7 @@ p { margin: 0 0 8px; }
 
 a { text-decoration: none; color: inherit; }
 
-/* ── Tables ─────────────────────────────────────────────────── */
+
 table {
     width: 100%;
     background: var(--surface);
@@ -134,14 +134,14 @@ td {
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--surface-muted); }
 
-/* Header row never hover-highlights */
+
 thead tr:hover th { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
 
-/* ── Top-bar header (used on every portal page) ─────────────── */
+
 .topbar td { padding: 14px 16px; vertical-align: middle; }
 .topbar td:last-child { text-align: right; }
 
-/* ── Student info strip ─────────────────────────────────────── */
+
 .student-info td {
     font-size: 13px;
     padding: 10px 16px;
@@ -149,7 +149,7 @@ thead tr:hover th { background: linear-gradient(135deg, #1e293b 0%, #334155 100%
 }
 .student-info td b { color: var(--text); }
 
-/* ── Sidebar nav ────────────────────────────────────────────── */
+
 .sidebar { padding: 12px 10px; }
 
 .sidebar button {
@@ -180,7 +180,7 @@ thead tr:hover th { background: linear-gradient(135deg, #1e293b 0%, #334155 100%
     border-color: var(--primary);
 }
 
-/* Hamburger toggle */
+
 #hamburger-btn {
     width: 100%;
     text-align: left;
@@ -188,7 +188,7 @@ thead tr:hover th { background: linear-gradient(135deg, #1e293b 0%, #334155 100%
     font-size: 14px;
 }
 
-/* ── Buttons ─────────────────────────────────────────────────── */
+
 button {
     display: inline-flex;
     align-items: center;
@@ -258,14 +258,14 @@ button.btn-success {
     box-shadow: 0 2px 6px rgba(22,163,74,0.22);
 }
 
-/* Sidebar td width override */
+
 td[width="20%"] button {
     width: 100%;
     text-align: left;
     margin-bottom: 4px;
 }
 
-/* ── Form inputs ─────────────────────────────────────────────── */
+
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -306,7 +306,7 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-/* Inline field errors */
+
 .err {
     display: none;
     color: var(--danger);
@@ -314,7 +314,7 @@ input[type="radio"] {
     margin-top: 4px;
 }
 
-/* ── Badge / status chips ────────────────────────────────────── */
+
 .badge {
     display: inline-block;
     padding: 2px 9px;
@@ -329,21 +329,21 @@ input[type="radio"] {
 .badge-warning { background: #fefce8;            color: var(--warning); }
 .badge-info    { background: var(--primary-light); color: var(--primary-dark); }
 
-/* ── Images ─────────────────────────────────────────────────── */
+
 img {
     border-radius: var(--radius-md);
     object-fit: cover;
     box-shadow: var(--shadow-xs);
 }
 
-/* Profile photo circle */
+
 img.avatar {
     border-radius: 50%;
     border: 3px solid var(--surface);
     outline: 2px solid var(--primary);
 }
 
-/* ── Weather widget ─────────────────────────────────────────── */
+
 #weather-widget {
     display: inline-flex;
     align-items: center;
@@ -367,7 +367,7 @@ img.avatar {
 #weather-widget.loading { opacity: 0.65; }
 #weather-widget.error   { background: linear-gradient(135deg, #7f1d1d, #ef4444); }
 
-/* ── Utility spacing ─────────────────────────────────────────── */
+
 .mt-0 { margin-top: 0; }
 .mb-0 { margin-bottom: 0; }
 .gap  { margin-bottom: 16px; }

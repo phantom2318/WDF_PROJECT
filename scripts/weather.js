@@ -1,26 +1,19 @@
-// ============================================================
-//  weather.js — Weather widget for home.html (dashboard)
-//  Fetches current weather for Ahmedabad from OpenWeatherMap
-//  and renders it into #weather-widget.
-// ============================================================
 
 (function () {
     var API_KEY = '97ad251d52056557f7e7ba7c37ef88be';
-
-    // Map OWM icon codes to simple emoji
     function iconEmoji(code) {
         if (!code) return '🌡️';
         var id = code.slice(0, 2);
         var map = {
-            '01': '☀️',   // clear
-            '02': '🌤️',   // few clouds
-            '03': '🌥️',   // scattered clouds
-            '04': '☁️',   // broken/overcast clouds
-            '09': '🌧️',   // shower rain
-            '10': '🌦️',   // rain
-            '11': '⛈️',   // thunderstorm
-            '13': '❄️',   // snow
-            '50': '🌫️'    // mist/fog
+            '01': '☀️',
+            '02': '🌤️',
+            '03': '🌥️',
+            '04': '☁️',
+            '09': '🌧️',
+            '10': '🌦️',
+            '11': '⛈️',
+            '13': '❄️',
+            '50': '🌫️'
         };
         return map[id] || '🌡️';
     }
@@ -62,7 +55,5 @@
             })
             .catch(function () { renderError('Network error'); });
     }
-
-    // Always show Ahmedabad weather — no location prompt
     fetchByCity('Ahmedabad');
 }());

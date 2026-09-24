@@ -7,7 +7,7 @@
     "fullName": "Patel Om Ketankumar",
     "dob": "January 23, 2008",
     "gender": "Male",
-    "bloodGroup": "A+",
+    "bloodGroup": "O+",
     "email": "25dcs095@charusat.edu.in",
     "phone": "+91 93130 90881",
     "address": "Ahmedabad, Gujarat",
@@ -16,5 +16,43 @@
     "semester": "3rd Semester",
     "cgpa": "7.0",
     "department": "Computer Science Engineering"
+  },
+
+    "25DCS080": {
+    "studentId": "25DCS080",
+    "firstName": "Gian",
+    "middleName": "Bhratkumar",
+    "lastName": "Patel",
+    "fullName": "Patel gian bharatkumar",
+    "dob": "August 08, 2001",
+    "gender": "Male",
+    "bloodGroup": "O+",
+    "email": "25dcs080@charusat.edu.in",
+    "phone": "+91 99801 81099",
+    "address": "Nadiad, Gujarat",
+    "course": "B.Tech Computer Science",
+    "year": "2",
+    "semester": "3rd Semester",
+    "cgpa": "9.0",
+    "department": "Computer Science Engineering"
+  },
+
+    "24IT001": {
+    "studentId": "24IT001",
+    "firstName": "Jupiter",
+    "middleName": "Suryakumar",
+    "lastName": "Solariya",
+    "fullName": "Solariya Jupiter Suryakumar",
+    "dob": "January 01, 2006",
+    "gender": "Female",
+    "bloodGroup": "O-",
+    "email": "24dit001@charusat.edu.in",
+    "phone": "+91 99785 99645",
+    "address": "Surat, Gujarat",
+    "course": "B.Tech Information Technology",
+    "year": "3",
+    "semester": "5rd Semester",
+    "cgpa": "5.0",
+    "department": "information Technology"
   }
 }

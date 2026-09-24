@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="portal.css">
     <link rel="stylesheet" href="darkmode.css">
     <style>
-        /* ── Login/Register page layout ── */
+
         body {
             min-height: 100vh;
             display: flex;
@@ -22,7 +22,7 @@
         .portal-header h1 { font-size: 1.9rem; }
         .portal-header p  { color: var(--text-muted); font-size: 14px; margin-top: 6px; }
 
-        /* Card */
+
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -33,7 +33,7 @@
             overflow: hidden;
         }
 
-        /* Tab bar */
+
         .tab-bar { display: flex; border-bottom: 1px solid var(--border); }
 
         .tab-btn {
@@ -54,34 +54,34 @@
         .tab-btn:hover  { background: var(--bg); color: var(--text); transform: none; box-shadow: none; }
         .tab-btn.active { background: var(--surface); color: var(--primary); border-bottom: 2px solid var(--primary); transform: none; box-shadow: none; }
 
-        /* Panels */
+
         .tab-panel        { display: none; padding: 32px 36px; }
         .tab-panel.active { display: block; }
 
         .panel-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 22px; color: var(--text); }
 
-        /* Form groups */
+
         .form-group         { margin-bottom: 15px; }
         .form-group label   { display: block; font-size: 11.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
         .form-group input,
         .form-group select  { width: 100%; }
 
-        /* Radio / checkbox rows */
+
         .radio-row, .check-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; padding: 4px 0; }
         .radio-row label, .check-row label { font-size: 13px; font-weight: 400; color: var(--text); text-transform: none; letter-spacing: 0; margin-bottom: 0; cursor: pointer; }
         .radio-row input, .check-row input[type="checkbox"] { width: auto; margin-right: 4px; }
 
-        /* Password strength */
+
         #strength-bar-wrap { width: 100%; height: 5px; background: var(--border); border-radius: 99px; margin-top: 6px; }
         #strength-bar      { height: 100%; width: 0; border-radius: 99px; transition: width 0.3s, background 0.3s; }
         #strength-text     { font-size: 11px; color: var(--text-muted); margin-top: 3px; display: block; }
 
-        /* Full-width submit */
+
         .btn-full  { width: 100%; padding: 11px; margin-top: 6px; }
         .btn-row   { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
         .btn-row .btn-full { margin-top: 0; }
 
-        /* Banners */
+
         #error-banner {
             display: none;
             background: var(--danger-bg);
@@ -109,10 +109,10 @@
 
         .footer-note { margin-top: 20px; color: var(--text-muted); font-size: 12px; text-align: center; }
 
-        /* Two-column grid for register form */
+
         .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
 
-        /* Registration success dialog */
+
         .success-dialog-backdrop {
             position: fixed;
             inset: 0;
@@ -175,13 +175,13 @@
 
     <div class="card">
 
-        <!-- Tab bar -->
+
         <div class="tab-bar">
             <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
             <button class="tab-btn"        id="tab-reg"   onclick="switchTab('reg')">Register</button>
         </div>
 
-        <!-- ══════════ LOGIN PANEL ══════════ -->
+
         <div class="tab-panel active" id="panel-login">
             <p class="panel-title">Welcome back</p>
 
@@ -204,42 +204,42 @@
             </form>
         </div>
 
-        <!-- ══════════ REGISTER PANEL ══════════ -->
+
         <div class="tab-panel" id="panel-reg">
             <p class="panel-title">Create an account</p>
 
             <form id="regForm" novalidate>
 
                 <div class="two-col">
-                    <!-- Student ID -->
+
                     <div class="form-group" style="grid-column:1/-1;">
                         <label for="reg-student-id">Student ID *</label>
                         <input type="text" id="reg-student-id" name="studentId" placeholder="e.g. 25DCS095" autocomplete="off">
                         <div class="err" id="err-reg-id">Student ID must be 4–15 alphanumeric characters.</div>
                     </div>
 
-                    <!-- Full Name -->
+
                     <div class="form-group" style="grid-column:1/-1;">
                         <label for="fullname">Full Name *</label>
                         <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" autocomplete="name">
                         <div class="err" id="err-fullname">Name must be at least 3 letters (alphabets only).</div>
                     </div>
 
-                    <!-- Email -->
+
                     <div class="form-group" style="grid-column:1/-1;">
                         <label for="email">Email Address *</label>
                         <input type="email" id="email" name="email" placeholder="student@college.edu" autocomplete="email">
                         <div class="err" id="err-email">Enter a valid email (e.g. name@domain.com).</div>
                     </div>
 
-                    <!-- Mobile -->
+
                     <div class="form-group">
                         <label for="mobile">Mobile Number *</label>
                         <input type="tel" id="mobile" name="mobile" placeholder="10-digit number" maxlength="10">
                         <div class="err" id="err-mobile">Valid 10-digit number starting with 6–9.</div>
                     </div>
 
-                    <!-- Gender -->
+
                     <div class="form-group">
                         <label>Gender *</label>
                         <div class="radio-row">
@@ -250,7 +250,7 @@
                         <div class="err" id="err-gender">Please select your gender.</div>
                     </div>
 
-                    <!-- Password -->
+
                     <div class="form-group">
                         <label for="reg-password">Password *</label>
                         <input type="password" id="reg-password" name="password" autocomplete="new-password" placeholder="Create password">
@@ -259,14 +259,14 @@
                         <div class="err" id="err-password">Min 8 chars: upper, lower, digit &amp; special char.</div>
                     </div>
 
-                    <!-- Confirm Password -->
+
                     <div class="form-group">
                         <label for="confirm-password">Confirm Password *</label>
                         <input type="password" id="confirm-password" name="confirm-password" autocomplete="new-password" placeholder="Repeat password">
                         <div class="err" id="err-confirm">Passwords do not match.</div>
                     </div>
 
-                    <!-- Course -->
+
                     <div class="form-group">
                         <label for="course">Course *</label>
                         <select id="course" name="course">
@@ -280,7 +280,7 @@
                         <div class="err" id="err-course">Please select your course.</div>
                     </div>
 
-                    <!-- Year -->
+
                     <div class="form-group">
                         <label for="year">Year of Study *</label>
                         <select id="year" name="year">
@@ -293,7 +293,7 @@
                         <div class="err" id="err-year">Please select your year.</div>
                     </div>
 
-                    <!-- Department -->
+
                     <div class="form-group" style="grid-column:1/-1;">
                         <label for="department">Department</label>
                         <select id="department" name="department">
@@ -305,7 +305,7 @@
                         </select>
                     </div>
 
-                    <!-- Events -->
+
                     <div class="form-group" style="grid-column:1/-1;">
                         <label>Events of Interest</label>
                         <div class="check-row">
@@ -316,7 +316,7 @@
                         </div>
                     </div>
 
-                    <!-- Terms -->
+
                     <div class="form-group" style="grid-column:1/-1;">
                         <div class="check-row">
                             <input type="checkbox" id="terms" name="terms">
@@ -335,7 +335,7 @@
 
             <div id="reg-success-msg">&#10003; Registration submitted successfully! Welcome aboard.</div>
         </div>
-        <!-- end register panel -->
+
 
     </div>
 

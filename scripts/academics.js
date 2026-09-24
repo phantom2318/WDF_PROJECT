@@ -1,14 +1,12 @@
-function toggleResultForm() {
+function toggleResultForm() 
+{
     var form = document.getElementById("result-form");
     if (form.style.display === "none") {
         form.style.display = "block";
-        
-        // Dynamically set max semester based on user
-        var maxSem = 8; // Default
+        var maxSem = 8;
         if (typeof AUTH !== 'undefined') {
             var user = AUTH.currentUser();
             if (user && user.year) {
-                // If user is in year 3, they could be in sem 5 or 6. We will set max to year * 2.
                 maxSem = parseInt(user.year) * 2;
             }
         }
@@ -18,7 +16,8 @@ function toggleResultForm() {
     }
 }
 
-function displayResult() {
+function displayResult() 
+{
     var semesterInput = document.getElementById("semester-input");
     var semester = parseInt(semesterInput.value);
     var examType = document.getElementById("exam-input").value;
@@ -30,7 +29,7 @@ function displayResult() {
         alert("Please enter a valid semester.");
         return;
     }
-    
+
     if (semester > maxSem) {
         alert("You cannot enter a semester greater than your current maximum semester (" + maxSem + ").");
         return;
