@@ -91,15 +91,16 @@ var AUTH = (
         var newUser = 
         {
             studentId:  data.studentId.trim(),
-            name:       data.name.trim(),
+            firstName:  data.firstName.trim(),
+            middleName: data.middleName.trim(),
+            lastName:   data.lastName.trim(),
             email:      data.email.trim(),
             mobile:     data.mobile.trim(),
             gender:     data.gender,
             password:   data.password,
             course:     data.course,
             year:       data.year,
-            department: data.department || '',
-            interests:  data.interests  || []
+            department: data.department || ''
         };
 
         users.push(newUser);

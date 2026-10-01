@@ -93,7 +93,9 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         var el = document.getElementById('reg-student-id');
         return setError(el, 'err-reg-id', !PATTERNS.studentId.test(el.value.trim()));
     }
-    function validateName()     { var el = document.getElementById('fullname');        return setError(el, 'err-fullname', !PATTERNS.name.test(el.value.trim())); }
+    function validateFirstName()  { var el = document.getElementById('firstname');       return setError(el, 'err-firstname', !PATTERNS.name.test(el.value.trim())); }
+    function validateMiddleName() { var el = document.getElementById('middlename');      return setError(el, 'err-middlename', el.value.trim() !== '' && !PATTERNS.name.test(el.value.trim())); }
+    function validateLastName()   { var el = document.getElementById('lastname');        return setError(el, 'err-lastname', !PATTERNS.name.test(el.value.trim())); }
     function validateEmail()    { var el = document.getElementById('email');           return setError(el, 'err-email',    !PATTERNS.email.test(el.value.trim())); }
     function validateMobile()   { var el = document.getElementById('mobile');          return setError(el, 'err-mobile',   !PATTERNS.mobile.test(el.value.trim())); }
     function validatePassword() { var el = document.getElementById('reg-password');    return setError(el, 'err-password', !PATTERNS.password.test(el.value)); }
@@ -116,7 +118,9 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         return !el.checked;
     }
     document.getElementById('reg-student-id').addEventListener('blur',    validateRegStudentId);
-    document.getElementById('fullname').addEventListener('blur',           validateName);
+    document.getElementById('firstname').addEventListener('blur',          validateFirstName);
+    document.getElementById('middlename').addEventListener('blur',         validateMiddleName);
+    document.getElementById('lastname').addEventListener('blur',           validateLastName);
     document.getElementById('email').addEventListener('blur',              validateEmail);
     document.getElementById('mobile').addEventListener('blur',             validateMobile);
     document.getElementById('reg-password').addEventListener('blur',       validatePassword);
@@ -127,7 +131,9 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
         e.preventDefault();
         var hasError = false;
         if (validateRegStudentId()) hasError = true;
-        if (validateName())         hasError = true;
+        if (validateFirstName())    hasError = true;
+        if (validateMiddleName())   hasError = true;
+        if (validateLastName())     hasError = true;
         if (validateEmail())        hasError = true;
         if (validateMobile())       hasError = true;
         if (validatePassword())     hasError = true;
@@ -142,21 +148,18 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
             if (first) first.focus();
             return;
         }
-        var interests = Array.prototype.map.call(
-            document.querySelectorAll('input[name="interest"]:checked'),
-            function (cb) { return cb.value; }
-        );
         var result = AUTH.register({
             studentId:  document.getElementById('reg-student-id').value,
-            name:       document.getElementById('fullname').value,
+            firstName:  document.getElementById('firstname').value,
+            middleName: document.getElementById('middlename').value,
+            lastName:   document.getElementById('lastname').value,
             email:      document.getElementById('email').value,
             mobile:     document.getElementById('mobile').value,
             gender:     document.querySelector('input[name="gender"]:checked').value,
             password:   document.getElementById('reg-password').value,
             course:     document.getElementById('course').value,
             year:       document.getElementById('year').value,
-            department: document.getElementById('department').value,
-            interests:  interests
+            department: document.getElementById('department').value
         });
 
         if (result.ok) {

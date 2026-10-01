@@ -220,9 +220,21 @@
 
 
                     <div class="form-group" style="grid-column:1/-1;">
-                        <label for="fullname">Full Name *</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" autocomplete="name">
-                        <div class="err" id="err-fullname">Name must be at least 3 letters (alphabets only).</div>
+                        <label for="firstname">First Name *</label>
+                        <input type="text" id="firstname" name="firstname" placeholder="Enter your first name">
+                        <div class="err" id="err-firstname">First name must be at least 3 letters (alphabets only).</div>
+                    </div>
+
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label for="middlename">Middle Name</label>
+                        <input type="text" id="middlename" name="middlename" placeholder="Enter your middle name">
+                        <div class="err" id="err-middlename">Middle name must contain only alphabets if provided.</div>
+                    </div>
+
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label for="lastname">Last Name *</label>
+                        <input type="text" id="lastname" name="lastname" placeholder="Enter your last name">
+                        <div class="err" id="err-lastname">Last name must be at least 3 letters (alphabets only).</div>
                     </div>
 
 
@@ -307,17 +319,6 @@
 
 
                     <div class="form-group" style="grid-column:1/-1;">
-                        <label>Events of Interest</label>
-                        <div class="check-row">
-                            <span><input type="checkbox" id="AIdea" name="interest" value="AIdea"><label for="AIdea">AIdea</label></span>
-                            <span><input type="checkbox" id="sih" name="interest" value="SIH"><label for="sih">Smart India Hackathon</label></span>
-                            <span><input type="checkbox" id="ifest" name="interest" value="i-fest"><label for="ifest">i-fest</label></span>
-                            <span><input type="checkbox" id="cultural" name="interest" value="Cultural"><label for="cultural">Cultural</label></span>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group" style="grid-column:1/-1;">
                         <div class="check-row">
                             <input type="checkbox" id="terms" name="terms">
                             <label for="terms" style="font-size:13px;">I accept the Terms &amp; Conditions</label>
@@ -357,3 +358,4 @@
 
 </body>
 </html>
+
