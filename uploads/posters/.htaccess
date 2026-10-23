@@ -1,0 +1,26 @@
+# ==========================================================
+# StudentHub: Uploads Directory Security Rules
+# Disallow execution of scripts within user upload directories
+# ==========================================================
+
+# 1. Disable execution of PHP and executable script handlers
+<FilesMatch "(?i)\.(php|php[0-9]?|phtml|phar|pl|py|cgi|asp|aspx|sh|bash|exe|bat|cmd|js)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 2. Disable directory indexes
+Options -Indexes -ExecCGI
+
+# 3. Serve only valid static MIME types
+<IfModule mod_mime.c>
+    RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phar
+    AddType image/jpeg .jpg .jpeg
+    AddType image/png .png
+    AddType image/webp .webp
+</IfModule>

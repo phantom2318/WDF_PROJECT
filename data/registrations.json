@@ -1,0 +1,58 @@
+[
+    {
+        "fullname": "Aarav Sharma",
+        "email": "aarav.sharma@charusat.edu.in",
+        "phone": "9876543210",
+        "course": "B.Tech",
+        "year": "3",
+        "department": "Computer Science",
+        "gender": "Male",
+        "purpose": "Technical Workshop",
+        "message": "Looking forward to the AI/Web Dev workshop session.",
+        "user_ip": "::1",
+        "id": "REG-20261022-0001",
+        "submitted_at": "2026-10-22 18:39:54"
+    },
+    {
+        "fullname": "Priya Patel",
+        "email": "priya.patel@charusat.edu.in",
+        "phone": "8765432109",
+        "course": "BCA",
+        "year": "1",
+        "department": "Information Technology",
+        "gender": "Female",
+        "purpose": "Club Membership",
+        "message": "Interested in joining the coding and design club.",
+        "user_ip": "::1",
+        "id": "REG-20261022-0002",
+        "submitted_at": "2026-10-22 18:39:54"
+    },
+    {
+        "fullname": "Priya Patel",
+        "email": "priya.patel@charusat.edu.in",
+        "phone": "8765432109",
+        "course": "BCA",
+        "year": "1",
+        "department": "Information Technology",
+        "gender": "Female",
+        "purpose": "Club Membership",
+        "message": "",
+        "user_ip": "::1",
+        "id": "REG-20261022-0003",
+        "submitted_at": "2026-10-22 18:51:22"
+    },
+    {
+        "fullname": "Devanshu Bhatt",
+        "email": "devanshu.bhatt@charusat.edu.in",
+        "phone": "9876543210",
+        "course": "B.Tech",
+        "year": "3",
+        "department": "Information Technology",
+        "gender": "Male",
+        "purpose": "Event Registration",
+        "message": "Testing seamless registration in continuous portal.",
+        "user_ip": "::1",
+        "id": "REG-20261022-0004",
+        "submitted_at": "2026-10-22 19:54:30"
+    }
+]
